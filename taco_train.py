@@ -121,7 +121,14 @@ elif args.command == 'test':
         # another equivalent way to evaluate the model is to use `trainer.test`
 
 
-elif args.image_path == 'custom':
+elif args.command == 'custom':
+    print(args.image_path)
+
+    # Inference should use the config with parameters that are used in training
+    cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")  # path to the model we just trained
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.2  # set a custom testing threshold
+    predictor = DefaultPredictor(cfg)
+
     im = cv2.imread(args.image_path)
     outputs = predictor(im)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
     v = Visualizer(im[:, :, ::-1],
@@ -131,7 +138,8 @@ elif args.image_path == 'custom':
                    # remove the colors of unsegmented pixels. This option is only available for segmentation models
                    )
     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-    cv2.imwrite('./output/', out)
+    img_out = out.get_image()#[:, :, ::-1]
+    cv2.imwrite('./output/new_pic1.jpg', img_out)
     # cv2.imshow(out.get_image()[:, :, ::-1])
 
 
