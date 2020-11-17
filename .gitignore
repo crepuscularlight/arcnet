@@ -1,2 +1,3 @@
-*data
-*/data
+data/batch_*
+data/annotations_*.json
+output/events.*
