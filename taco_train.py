@@ -1,16 +1,24 @@
 """
 Author: Fidel Esquivel Estay
-GH: phideltaee
+GitHub: phideltaee
 Description: Custom training model for Detectron2 using a modified version of the TACO dataset.
 
 ------------------------------------------------------
 ------------------------------------------------------
 NOTES on Implementation:
 
-    # Training on TACO dataset. First step is to remap the directory to the desired number of classes. Choose a map
-    (dictionary) or create your own and place it in the folder 'maps'
-    # Run the remapping
-    #   python remap_classes --class_map <path_to_map/file.csv> --ann_dir <path_to_annotations/file.json>
+    # Training on TACO dataset.
+
+    # Step 1:   Remap output to the desired number of classes. Choose a map (dictionary) or create
+    #           your own and place it in the folder 'maps'.
+
+    #   - - Run the remapping - -
+    #           python remap_classes --class_map <path_to_map/file.csv> --ann_dir <path_to_annotations/file.json>
+
+    # Step 2:   Split dataset into train-test splits, k-times for k-fold cross validation.
+
+    #   - - Split the dataset - -
+    #           python split_dataset.py --nr_trials <K_folds> --out_name <name of file> --dataset_dir <path_to_data>
 
     # To train the model:
     #    python arcnet_main.py train --dataset_dir <path_to_dataset/>
@@ -20,31 +28,9 @@ NOTES on Implementation:
 
     # To try the model for predicting an image
     #    python arcnet_main.py inference --image_path path_to_test_image.jpg
+         python arcnet_main.py inference --image_path img_test/test_img1.jpg
 
-
-    # First make sure you have split the dataset into train/val/test set. e.g. You should have annotations_0_train.json
-    # in your dataset dir.
-    # Otherwise, You can do this by calling
-    python3 split_dataset.py --dataset_dir ../data
-
-    # Train a new model starting from pre-trained COCO weights on train set split #0
-    python3 -W ignore detector.py train --model=coco --dataset=../data --class_map=./taco_config/map_10.csv --round 0
-
-    # Continue training a model that you had trained earlier
-    python3 -W ignore detector.py train  --dataset=../data --model=<model_name> --class_map=./taco_config/map_10.csv --round 0
-
-    # Continue training the last model you trained with image augmentation
-    python3 detector.py train --dataset=../data --model=last --round 0 --class_map=./taco_config/map_10.csv --use_aug
-
-    # Test model and visualize predictions image by image
-    python3 detector.py test --dataset=../data --model=<model_name> --round 0 --class_map=./taco_config/map_10.csv
-
-    # Run COCO evaluation on a trained model
-    python3 detector.py evaluate --dataset=../data --model=<model_name> --round 0 --class_map=./taco_config/map_10.csv
-
-
-
-    # Check Tensorboard for model training validation information.
+     # Check Tensorboard for model training validation information.
      tensorboard --logdir ./output/
 
 """
@@ -60,7 +46,7 @@ from datetime import datetime
 # Importing custom functions
 from utils import *
 
-# Importing Detectron libraries
+# Importing Detectron2 libraries
 from detectron2.utils.visualizer import Visualizer
 from detectron2.data.datasets import register_coco_instances
 from detectron2.data import DatasetCatalog, MetadataCatalog
@@ -74,21 +60,29 @@ from detectron2.data import build_detection_test_loader
 
 # Parsing global arguments
 parser = argparse.ArgumentParser(description='Custom implementation of Detectron2 using the TACO dataset.')
-parser.add_argument('--class_map', required=False, metavar="/path/file.csv", help='Target classes')
+parser.add_argument('--class_map', required=True, metavar="/path/file.csv", help='Target classes')
 parser.add_argument('--image_path', required=False, metavar="/path/file.jpg", help='Test image')
-parser.add_argument('--data_dir', required=False, metavar="/path_to_data/", help='Dataset directory')
+parser.add_argument('--data_dir', required=True, metavar="/path_to_data/", help='Dataset directory')
 parser.add_argument("command", metavar="<command>",help="Opt: 'train', 'test', 'inference")
 args = parser.parse_args()
-
 
 # TODO Create new train/test/val split for training every time this script is called.
 
 # Registering the custom dataset using Detectron2 libraries
-# TODO add dataset directory and map version to data loading part.
-#register_coco_instances("taco_train",{},"./data/annotations_0map2_train.json","./data")
-register_coco_instances("taco_train",{},"./data/annotations_0_train.json","./data")
-register_coco_instances("taco_test",{},"./data/annotations_0_test.json","./data")
-register_coco_instances("taco_val",{},"./data/annotations_0_val.json","./data")
+
+# TODO load train test and val data directly from the run commands (not hardcoded)
+# gets the annotation directly from the train set.
+#class_map_name = args.class_map.split("/")[-1].split(".")[-2]
+
+# Registering map_2 annotations
+register_coco_instances("taco_train",{},"./data/annotations_0_map_2_train.json","./data")
+register_coco_instances("taco_test",{},"./data/annotations_0_map_2_test.json","./data")
+register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./data")
+
+# Registering with working sample
+#register_coco_instances("taco_train",{},"./data/annotations_0_train.json","./data")
+#register_coco_instances("taco_test",{},"./data/annotations_0_test.json","./data")
+#register_coco_instances("taco_val",{},"./data/annotations_0_val.json","./data")
 
 dataset_dicts_train = DatasetCatalog.get("taco_train")
 dataset_dicts_test = DatasetCatalog.get("taco_test")
@@ -98,7 +92,9 @@ taco_metadata = MetadataCatalog.get("taco_train")
 print("datasets registered successfully")
 
 # verify the custom dataset was imported successfully by loading some images
-for d in random.sample(dataset_dicts_train, 2):
+for d in random.sample(dataset_dicts_train, 5):
+    print(d["file_name"])
+    assert os.path.isfile(d["file_name"]), "Image not loaded correctly!"
     img = cv2.imread(d["file_name"])
     visualizer = Visualizer(img[:, :, ::-1], metadata=taco_metadata, scale=0.5)
     out = visualizer.draw_dataset_dict(d)
@@ -109,6 +105,7 @@ for d in random.sample(dataset_dicts_train, 2):
     cv2.imshow("rand_name", img_resized)# out.get_image()[:, :, ::-1])
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
 
 # Training custom dataset
 cfg = get_cfg()
@@ -121,12 +118,13 @@ cfg.SOLVER.IMS_PER_BATCH = 2
 cfg.SOLVER.BASE_LR = 0.0025  # pick a good LR
 cfg.SOLVER.MAX_ITER = 2000
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 264   # faster, and good enough for this toy dataset (default: 512)
-cfg.MODEL.ROI_HEADS.NUM_CLASSES = 60  # only has one class (ballon). (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
+cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 
 trainer = DefaultTrainer(cfg)
 trainer.resume_or_load(resume=False)
+
 if args.command == "train":
     # Train the trainer with the configuration set earlier.
     trainer.train()
