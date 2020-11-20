@@ -184,7 +184,7 @@ elif args.command == 'inference':
     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     img_out = out.get_image()#[:, :, ::-1]
 
-    # Converting to RGB
+    # Converting to RGB (fixing for display)
     img_out = cv2.cvtColor(img_out, cv2.COLOR_BGR2RGB)
 
     # adding a timestamp to testing

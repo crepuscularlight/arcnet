@@ -99,12 +99,6 @@ def get_taco_dicts(img_dir):
         dataset_dicts.append(record)
     return dataset_dicts
 
-"""
-for d in ["train", "val"]:
-    DatasetCatalog.register("balloon_" + d, lambda d=d: get_balloon_dicts("balloon/" + d))
-    MetadataCatalog.get("balloon_" + d).set(thing_classes=["balloon"])
-balloon_metadata = MetadataCatalog.get("balloon_train")
-"""
 
 if __name__ == "__main__":
     dataset_dir = "./data/"
