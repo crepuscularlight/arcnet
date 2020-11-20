@@ -61,7 +61,7 @@ def remap_classes(dataset, class_map):
     id_ann_repeated = []
     for index_old, ann_old in enumerate(dataset['annotations']):
         if ann_old['id'] in id_ann_all:
-            # found a duplicate, re-id at the end
+            # if found a duplicate, re-id at the end
             id_ann_repeated.append(ann_old['id'])
             ann_old['id'] = len(dataset['annotations'])+len(id_ann_repeated)-1
         else:

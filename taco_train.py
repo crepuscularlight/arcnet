@@ -167,7 +167,7 @@ elif args.command == 'inference':
 
     # Inference should use the config with parameters that are used in training
     cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")  # path to the model we just trained
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a custom testing threshold
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.3  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
     im = cv2.imread(args.image_path)
