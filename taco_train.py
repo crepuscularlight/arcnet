@@ -21,14 +21,15 @@ NOTES on Implementation:
     #           python split_dataset.py --nr_trials <K_folds> --out_name <name of file> --dataset_dir <path_to_data>
 
     # To train the model:
-    #    python arcnet_main.py train --dataset_dir <path_to_dataset/>
+    #    Template: python arcnet_main.py --data_dir <path_to_dataset/> train
+    #    EXAMPLE:  python arcnet_main.py --class_map maps/map_to_2.csv --data_dir data train
 
     # To test the model:
-    #    python arcnet_main.py test
+    #    Template: python arcnet_main.py test
 
-    # To try the model for predicting an image
-    #    python arcnet_main.py inference --image_path path_to_test_image.jpg
-         python arcnet_main.py inference --image_path img_test/test_img1.jpg
+    # To try the model for inference an image
+    #    TEMPLATE: python arcnet_main.py inference --image_path <path/to/test_image.jpg>
+    #    EXAMPLE:  python arcnet_main.py inference --image_path img_test/test_img1.jpg
 
      # Check Tensorboard for model training validation information.
      tensorboard --logdir ./output/
@@ -60,9 +61,9 @@ from detectron2.data import build_detection_test_loader
 
 # Parsing global arguments
 parser = argparse.ArgumentParser(description='Custom implementation of Detectron2 using the TACO dataset.')
-parser.add_argument('--class_map', required=True, metavar="/path/file.csv", help='Target classes')
-parser.add_argument('--image_path', required=False, metavar="/path/file.jpg", help='Test image')
-parser.add_argument('--data_dir', required=True, metavar="/path_to_data/", help='Dataset directory')
+parser.add_argument('--class_map', required=False, metavar="/path/file.csv", help='Target classes')
+parser.add_argument('--image_path', required=False, default='./img_test/test_img1.jpg',  metavar="/path/file.jpg", help='Test image')
+parser.add_argument('--data_dir', required=False, default='./data', metavar="/path_to_data/", help='Dataset directory')
 parser.add_argument("command", metavar="<command>",help="Opt: 'train', 'test', 'inference")
 args = parser.parse_args()
 
@@ -114,10 +115,10 @@ cfg.DATASETS.TRAIN = ("taco_train",)
 cfg.DATASETS.TEST = ("taco_test",)
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
-cfg.SOLVER.IMS_PER_BATCH = 2
+cfg.SOLVER.IMS_PER_BATCH = 4
 cfg.SOLVER.BASE_LR = 0.0025  # pick a good LR
-cfg.SOLVER.MAX_ITER = 2000
-cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 264   # faster, and good enough for this toy dataset (default: 512)
+cfg.SOLVER.MAX_ITER = 3000
+cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512   # faster, and good enough for this toy dataset (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
@@ -154,11 +155,11 @@ elif args.command == 'test':
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-        # Further testing and validation.
-        evaluator = COCOEvaluator("taco_val", ("bbox", "segm"), False, output_dir="./output/")
-        val_loader = build_detection_test_loader(cfg, "taco_val")
-        print(inference_on_dataset(trainer.model, val_loader, evaluator))
-        # another equivalent way to evaluate the model is to use `trainer.test`
+    # Further testing and validation.
+    evaluator = COCOEvaluator("taco_val", ("bbox", "segm"), False, output_dir="./output/")
+    val_loader = build_detection_test_loader(cfg, "taco_val")
+    print(inference_on_dataset(trainer.model, val_loader, evaluator))
+    # another equivalent way to evaluate the model is to use `trainer.test`
 
 
 elif args.command == 'inference':
@@ -166,23 +167,29 @@ elif args.command == 'inference':
 
     # Inference should use the config with parameters that are used in training
     cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")  # path to the model we just trained
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # set a custom testing threshold
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
     im = cv2.imread(args.image_path)
+
+
     outputs = predictor(im)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
     v = Visualizer(im[:, :, ::-1],
                    metadata=taco_metadata,
-                   scale=0.5,
-                   instance_mode=ColorMode.IMAGE_BW
+                   #scale=0.5,
+                   #instance_mode=ColorMode.IMAGE_BW,
+                   #instance_mode=ColorMode.SEGMENTATION,
                    # remove the colors of unsegmented pixels. This option is only available for segmentation models
                    )
     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     img_out = out.get_image()#[:, :, ::-1]
 
+    # Converting to RGB
+    img_out = cv2.cvtColor(img_out, cv2.COLOR_BGR2RGB)
 
+    # adding a timestamp to testing
     time_out = get_timestamp()
 
-    cv2.imwrite('./prediction'+time_out+'.jpg', img_out)
+    cv2.imwrite('./img_out/prediction'+time_out+'.jpg', img_out)
     # to visualize output uncomment below
     # cv2.imshow(out.get_image()[:, :, ::-1])
