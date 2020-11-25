@@ -28,8 +28,8 @@ NOTES on Implementation:
     #    Template: python arcnet_main.py test
 
     # To try the model for inference an image
-    #    TEMPLATE: python arcnet_main.py inference --image_path <path/to/test_image.jpg>
-    #    EXAMPLE:  python arcnet_main.py inference --image_path img_test/test_img1.jpg
+    #    TEMPLATE: python arcnet_main.py inference --image_path <path/to/test_image.jpg> --weights <path_to/weights.pth>
+    #    EXAMPLE:  python arcnet_main.py inference --image_path img_test/trash_01.jpg --weights output/taco_3000.pth
 
      # Check Tensorboard for model training validation information.
      tensorboard --logdir ./output/
@@ -65,6 +65,7 @@ parser.add_argument('--class_map', required=False, metavar="/path/file.csv", hel
 parser.add_argument('--image_path', required=False, default='./img_test/test_img1.jpg',  metavar="/path/file.jpg", help='Test image')
 parser.add_argument('--data_dir', required=False, default='./data', metavar="/path_to_data/", help='Dataset directory')
 parser.add_argument("command", metavar="<command>",help="Opt: 'train', 'test', 'inference")
+parser.add_argument('--weights', required=False, default='./output/model_final.pth', metavar="/trained_weights.pth", help='weights')
 args = parser.parse_args()
 
 # TODO Create new train/test/val split for training every time this script is called.
@@ -93,7 +94,7 @@ taco_metadata = MetadataCatalog.get("taco_train")
 print("datasets registered successfully")
 
 # verify the custom dataset was imported successfully by loading some images
-for d in random.sample(dataset_dicts_train, 5):
+for d in random.sample(dataset_dicts_train, 1):
     print(d["file_name"])
     assert os.path.isfile(d["file_name"]), "Image not loaded correctly!"
     img = cv2.imread(d["file_name"])
@@ -166,8 +167,8 @@ elif args.command == 'inference':
     print(args.image_path)
 
     # Inference should use the config with parameters that are used in training
-    cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")  # path to the model we just trained
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.3  # set a custom testing threshold
+    cfg.MODEL.WEIGHTS = args.weights  # path to the weights for inference.
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
     im = cv2.imread(args.image_path)

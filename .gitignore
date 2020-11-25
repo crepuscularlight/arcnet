@@ -1,6 +1,6 @@
 data/batch_*
 data/annotations_*.json
 output/events.*
-output/model_final.pth
+output/taco_3000.pth
 output/instances_predictions.pth
 output/*.pth
