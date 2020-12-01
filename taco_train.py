@@ -21,7 +21,7 @@ NOTES on Implementation:
     #           python split_dataset.py --nr_trials <K_folds> --out_name <name of file> --dataset_dir <path_to_data>
 
     # To train the model:
-    #    Template: python arcnet_main.py --data_dir <path_to_dataset/> train
+    #    Template: python arcnet_main.py --class_map <mapto_class.csv> --data_dir <path_to_dataset/> train
     #    EXAMPLE:  python arcnet_main.py --class_map maps/map_to_2.csv --data_dir data train
 
     # To test the model:
@@ -76,15 +76,15 @@ args = parser.parse_args()
 # gets the annotation directly from the train set.
 #class_map_name = args.class_map.split("/")[-1].split(".")[-2]
 
-# Registering map_2 annotations
+# Registering with 2 classes - map_to_2 annotations
 register_coco_instances("taco_train",{},"./data/annotations_0_map_2_train.json","./data")
 register_coco_instances("taco_test",{},"./data/annotations_0_map_2_test.json","./data")
 register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./data")
 
-# Registering with working sample
-#register_coco_instances("taco_train",{},"./data/annotations_0_train.json","./data")
-#register_coco_instances("taco_test",{},"./data/annotations_0_test.json","./data")
-#register_coco_instances("taco_val",{},"./data/annotations_0_val.json","./data")
+# Registering with standard TACO annotations - 60 classes.
+#register_coco_instances("taco_train",{},"./data/annotations_0__train.json","./data")
+#register_coco_instances("taco_test",{},"./data/annotations_0__test.json","./data")
+#register_coco_instances("taco_val",{},"./data/annotations_0__val.json","./data")
 
 dataset_dicts_train = DatasetCatalog.get("taco_train")
 dataset_dicts_test = DatasetCatalog.get("taco_test")
@@ -118,7 +118,7 @@ cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
 cfg.SOLVER.BASE_LR = 0.0025  # pick a good LR
-cfg.SOLVER.MAX_ITER = 3000
+cfg.SOLVER.MAX_ITER = 100
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512   # faster, and good enough for this toy dataset (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 
@@ -168,17 +168,16 @@ elif args.command == 'inference':
 
     # Inference should use the config with parameters that are used in training
     cfg.MODEL.WEIGHTS = args.weights  # path to the weights for inference.
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # set a custom testing threshold
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.0  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
     im = cv2.imread(args.image_path)
 
-
     outputs = predictor(im)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
     v = Visualizer(im[:, :, ::-1],
                    metadata=taco_metadata,
-                   #scale=0.5,
-                   #instance_mode=ColorMode.IMAGE_BW,
+                   scale=0.5,
+                   instance_mode=ColorMode.IMAGE_BW,
                    #instance_mode=ColorMode.SEGMENTATION,
                    # remove the colors of unsegmented pixels. This option is only available for segmentation models
                    )
@@ -194,3 +193,30 @@ elif args.command == 'inference':
     cv2.imwrite('./img_out/prediction'+time_out+'.jpg', img_out)
     # to visualize output uncomment below
     # cv2.imshow(out.get_image()[:, :, ::-1])
+
+    print(outputs["instances"].pred_classes)
+    print(outputs["instances"].pred_boxes)
+
+elif args.command == "predict_coco":
+    cfg = get_cfg()
+    cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.0
+    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")
+    predictor = DefaultPredictor(cfg)
+
+    im = cv2.imread(args.image_path)
+    outputs = predictor(im)
+    v = Visualizer(im[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
+
+    out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+    img_out = out.get_image()  # [:, :, ::-1]
+
+    # Converting to RGB (fixing for display)
+    img_out = cv2.cvtColor(img_out, cv2.COLOR_BGR2RGB)
+
+    # adding a timestamp to testing
+    time_out = get_timestamp()
+    cv2.imwrite('./img_out/prediction' + time_out + '.jpg', img_out)
+
+    print(outputs["instances"].pred_classes)
+    print(outputs["instances"].pred_boxes)

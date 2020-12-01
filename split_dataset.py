@@ -22,6 +22,7 @@ args = parser.parse_args()
 
 # TODO remove hardcoded annotation input path (possibly combine with remapping function)
 ann_input_path = args.dataset_dir + '/' + 'annotations_map_2.json'
+ann_input_path = args.dataset_dir + '/' + 'annotations.json'
 
 # Load annotations
 with open(ann_input_path, 'r') as f:
@@ -86,9 +87,9 @@ for i in range(args.nr_trials):
             train_set['scene_annotations'].append(ann)
 
     # Write dataset splits
-    ann_train_out_path = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + '_train.json'
-    ann_val_out_path   = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + '_val.json'
-    ann_test_out_path  = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + '_test.json'
+    ann_train_out_path = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + 'train.json'
+    ann_val_out_path   = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + 'val.json'
+    ann_test_out_path  = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + 'test.json'
 
     with open(ann_train_out_path, 'w+') as f:
         f.write(json.dumps(train_set))

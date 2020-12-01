@@ -1,0 +1,614 @@
+{
+    "name": "v01",
+    "description": "trial",
+    "created_at": "2020-11-30 11:31:15.598152+00:00",
+    "dataset": {
+        "name": "arc_litter",
+        "description": "dataset of trash for arc litter dataset",
+        "category": "Garden & vegetation",
+        "created_at": "2020-11-30 11:13:16.872125+00:00",
+        "owner": "festay",
+        "tasks": {
+            "segmentation": {
+                "description": "",
+                "task_type": "segmentation-bitmap",
+                "attributes": {
+                    "format_version": "0.1",
+                    "categories": [
+                        {
+                            "name": "plastic litter",
+                            "id": 0
+                        },
+                        {
+                            "name": "other litter",
+                            "id": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "samples": [
+            {
+                "uuid": "8de0cdd1-d2a9-492c-aa6f-249f3bac2449",
+                "name": "interceptor_ma.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/a523b467-c47f-4fe2-9774-761ab9c39f44.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "ad0d9bd5-4ef8-4518-815e-d8a2bcbe3b46",
+                "name": "test_img2.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/43b1fea2-5c5e-4ac7-9d79-7f5afd57bc87.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "41c90bbe-c1d6-4647-af03-bc9c36998177",
+                "name": "interceptor_dr.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/46106217-dcc8-4fc8-bbef-b839cbd8a120.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "59941708-da29-4c5e-93cd-324149926cd0",
+                        "label_status": "REJECTED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/6f6f7dbd-b77f-4ffd-9db7-c979547a1a95.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "4a514731-5f8f-475e-9968-bef290af9a66",
+                "name": "test_img1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/01b53fd6-f342-4ec4-a135-3fd76d7338c5.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "94d123ed-64df-4952-b554-0e808d730474",
+                "name": "trash_00.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/33cad988-a8cd-4761-992c-78224d4de75e.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "07335075-ba38-414c-9ab4-fd50f69f5722",
+                "name": "trash_02.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/4cbb6001-5448-410a-8d29-55cbb716e1af.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "9f89be1d-bab4-46a7-b801-c9da3c7ae2c6",
+                "name": "trash_01.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/c66878fd-013b-4cba-9f07-410fd8cd46bf.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "eb9e9686-775f-4403-baea-719dd6cbed09",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/b40defef-ba44-4ec8-a3f5-855d634706ca.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "386b842c-d9b5-4c1f-b010-0c29ad2d2ad9",
+                "name": "trash_03.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/c8bc87c1-e7a4-4270-92de-a64edf2ad491.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "767f78a8-fa3b-45ca-9969-68dd4e04e31f",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/40fab54d-c835-4c92-8a49-e8c8864220ce.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "32c9cdfc-e5d3-46b3-9c2b-112e38b3fefc",
+                "name": "trash_04_1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/85ee6ac3-e595-4dd8-b841-621f41a9c248.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "72be9ba6-48dd-474a-88c2-1e897d7f93a8",
+                "name": "trash_05_1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/ef70eae3-9e65-482e-a866-685793a8b661.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "7810b77f-163a-4dce-be9b-53943ed97921",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/666975cb-9259-4983-aa33-bd5416b9acde.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "03026db1-4ad5-4b9d-8c16-4654c6a25fe8",
+                "name": "trash_06_1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/cdd6f5af-9022-41b6-86f2-fe7a5bf618f1.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "64c2a512-7098-4a11-a1b8-e991188f31b5",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/796568da-afb8-4bc4-9b0e-d1708553ec6a.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "95443f02-bb25-4e10-ae6d-439d15274900",
+                "name": "trash_08.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/4d39f81e-0d0f-49e5-9931-429904931159.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "ded0a425-8e10-4612-83bc-8fdececf8e1c",
+                "name": "trash_07.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/cf9ee285-4ba8-44dc-9281-dab3e8ea0d87.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "f364ab24-7d9a-4cb4-9e22-1f5c61683e73",
+                "name": "trash_09.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fd1b239a-e1c4-40a5-b70e-feec568aa012.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "c42bb142-f8f6-42eb-958f-5e3cd9b60f33",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fb0536a5-d3fc-46b4-9bd8-3537f0ecadd5.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "39448ebc-b546-45ea-91da-6cad702a93be",
+                "name": "trash_10.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/436860ac-8d67-4060-94c1-f45d699fe756.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "ded6e209-a124-41f7-afa3-bf7664be43a9",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/821b5413-81d2-42aa-9cbd-ee6dcc0c9a37.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "bd200cd9-3900-4ace-97bd-f6961d9dfa6d",
+                "name": "trash_12.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/16bd16c1-3939-492d-bf7c-f044547a9794.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "3f4a22ee-70e2-47d5-ac41-b89d97b02f38",
+                "name": "trash_11.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/741aaeeb-aa28-450b-8d3f-c5532a774d84.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "3c7f1057-593d-4328-802d-fd84c238563f",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/8a7dcf0d-eed3-46b3-a073-9f393c2250eb.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "9609b7d5-ccae-4ade-a509-0ff2d9139994",
+                "name": "trash_leo1_depth.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/338ab5e7-0695-4763-8cda-f803368dcb20.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "e9c65335-ecc7-4065-90b3-08f8d1692e69",
+                "name": "trash_leo2_depth.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/08eb5625-a040-444d-8ec0-243f825fd017.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "f0b71d41-002d-4ab8-97cd-2c4250e53d38",
+                "name": "trash_leo1_rgb.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/e5dd713f-cc58-438b-bfa7-8a612d96e163.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "204603d5-f0d6-4f7b-8a37-261d89908034",
+                "name": "trash_dino.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/768327f3-4775-4337-9695-9e0bfc758211.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "77757f4b-577a-43f3-b6b7-f4dff6dd85bd",
+                "name": "trash_leo2_rgb.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/a84b05f6-282d-4f60-b7f8-aa8edfb7b0d8.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "dd648377-b163-407f-8bd4-a1fa346c1653",
+                "name": "trash_wheel.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fa3f3373-5499-4c09-af55-a6452dbda374.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "a64fa844-4a00-4ad1-988d-8cbabef15a3d",
+                "name": "trash_wheel2.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/eb6f6683-a2bf-4466-b0e3-6188644f6a71.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            },
+            {
+                "uuid": "fe21320c-c68e-4758-a81a-35efd4ee3d8b",
+                "name": "trash_13.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/2d93b3ff-f943-4072-aef6-d5b1562dfbbb.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": null
+                }
+            }
+        ]
+    }
+}
