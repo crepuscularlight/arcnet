@@ -9,8 +9,8 @@ from detectron2.data.datasets import register_coco_instances
 from detectron2.data import DatasetCatalog, MetadataCatalog
 
 # Importing the new dataset json file and specifying data content directory
-dataset_path = "data/arc_litter-v01_coco.json"
-data_path = "./segments/festay_arc_litter/v01"
+dataset_path = "test_dataset/arc_litter-v1.1_coco.json"
+data_path = "test_dataset/segments/festay_arc_litter/v1.1"
 
 # # importing the dataset in COCO format
 #import json

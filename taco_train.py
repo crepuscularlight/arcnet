@@ -165,10 +165,9 @@ elif args.command == 'test':
 
 elif args.command == 'inference':
     print(args.image_path)
-
     # Inference should use the config with parameters that are used in training
     cfg.MODEL.WEIGHTS = args.weights  # path to the weights for inference.
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.0  # set a custom testing threshold
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
     im = cv2.imread(args.image_path)
@@ -194,8 +193,9 @@ elif args.command == 'inference':
     # to visualize output uncomment below
     # cv2.imshow(out.get_image()[:, :, ::-1])
 
-    print(outputs["instances"].pred_classes)
-    print(outputs["instances"].pred_boxes)
+    # # Give information about predicted classes and boxes
+    # print(outputs["instances"].pred_classes)
+    # print(outputs["instances"].pred_boxes)
 
 elif args.command == "predict_coco":
     cfg = get_cfg()
