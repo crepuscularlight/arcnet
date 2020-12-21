@@ -25,7 +25,8 @@ NOTES on Implementation:
     #    EXAMPLE:  python arcnet_main.py --class_map maps/map_to_2.csv --data_dir data train
 
     # To test the model:
-    #    Template: python arcnet_main.py test
+    #    Template:  python arcnet_main.py test --weights <path_to/weigts.pth>
+    #    EXAMPLE:   python arcnet_main.py test --weights output/taco_3000.pth
 
     # To try the model for inference an image
     #    TEMPLATE: python arcnet_main.py inference --image_path <path/to/test_image.jpg> --weights <path_to/weights.pth>
@@ -86,9 +87,14 @@ register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./d
 #register_coco_instances("taco_test",{},"./data/annotations_0__test.json","./data")
 #register_coco_instances("taco_val",{},"./data/annotations_0__val.json","./data")
 
+# Obtaining the dataset catalog for each, train, val and test.
 dataset_dicts_train = DatasetCatalog.get("taco_train")
-dataset_dicts_test = DatasetCatalog.get("taco_test")
+#dataset_dicts_test = DatasetCatalog.get("taco_test")
 dataset_dicts_val = DatasetCatalog.get("taco_val")
+
+# Adding custom test file for ARC Litter dataset
+register_coco_instances("arc_test",{},"./segments/festay_arc_litter/arc_litter-v1.1_coco.json", "./segments/festay_arc_litter/v1.1")
+dataset_dicts_test = DatasetCatalog.get("arc_test")
 
 taco_metadata = MetadataCatalog.get("taco_train")
 print("datasets registered successfully")
@@ -113,31 +119,42 @@ for d in random.sample(dataset_dicts_train, 1):
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
 cfg.DATASETS.TRAIN = ("taco_train",)
-cfg.DATASETS.TEST = ("taco_test",)
+# Validation Set (ignoring wrong naming convention)
+cfg.DATASETS.TEST = ("arc_test",)
+cfg.TEST.EVAL_PERIOD = 60
+
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
-cfg.SOLVER.BASE_LR = 0.0025  # pick a good LR
-cfg.SOLVER.MAX_ITER = 100
-cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512   # faster, and good enough for this toy dataset (default: 512)
+cfg.SOLVER.BASE_LR = 0.0025  # Starting lr. Adaptive.
+cfg.SOLVER.MAX_ITER = 600
+cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
-
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 
-trainer = DefaultTrainer(cfg)
+# Freeze the first several stages so they are not trained.
+# There are 5 stages in ResNet. The first is a convolution, and the following
+# stages are each group of residual blocks.
+cfg.MODEL.BACKBONE.FREEZE_AT = 4 #default is 4
+
+# default trainer, does not include validation loss. Custom coco trainer created to tackle this.
+#trainer = DefaultTrainer(cfg)
+
+# Training with custom validation loss trainer CocoTrainer.py
+from CocoTrainer import CocoTrainer
+trainer = CocoTrainer(cfg)
 trainer.resume_or_load(resume=False)
 
 if args.command == "train":
-    # Train the trainer with the configuration set earlier.
     trainer.train()
 
 elif args.command == 'test':
     # Inference should use the config with parameters that are used in training
-    cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")  # path to the model we just trained
+    cfg.MODEL.WEIGHTS = args.weights # os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
-    for d in random.sample(dataset_dicts_val, 10):
+    for d in random.sample(dataset_dicts_test, 3):
         im = cv2.imread(d["file_name"])
         outputs = predictor(im)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
         v = Visualizer(im[:, :, ::-1],
@@ -151,15 +168,16 @@ elif args.command == 'test':
 
         # image too large to display - resize down to fit in the screen
         img_out = out.get_image()[:, :, ::-1]
-        img_out_resized = ResizeWithAspectRatio(img_out, width=800)
-        cv2.imshow("rand_name", img_out_resized)  # out.get_image()[:, :, ::-1])
+        #img_out_resized = ResizeWithAspectRatio(img_out, width=800)
+        cv2.imshow("rand_name", img_out)  # out.get_image()[:, :, ::-1])
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-    # Further testing and validation.
-    evaluator = COCOEvaluator("taco_val", ("bbox", "segm"), False, output_dir="./output/")
-    val_loader = build_detection_test_loader(cfg, "taco_val")
-    print(inference_on_dataset(trainer.model, val_loader, evaluator))
+    # Evaluating model performance on TEST set.
+    evaluator = COCOEvaluator("arc_test", ("bbox", "segm"), True, output_dir="./output/")
+    val_loader = build_detection_test_loader(cfg, 'arc_test')
+
+    inference_on_dataset(trainer.model, val_loader, evaluator)
     # another equivalent way to evaluate the model is to use `trainer.test`
 
 
@@ -170,8 +188,8 @@ elif args.command == 'inference':
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
+    # Visualize the Predictions
     im = cv2.imread(args.image_path)
-
     outputs = predictor(im)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
     v = Visualizer(im[:, :, ::-1],
                    metadata=taco_metadata,
@@ -189,7 +207,7 @@ elif args.command == 'inference':
     # adding a timestamp to testing
     time_out = get_timestamp()
 
-    cv2.imwrite('./img_out/prediction'+time_out+'.jpg', img_out)
+    cv2.imwrite('./img_out/prediction'+time_out+"_at_" + str(cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST) +'.jpg', img_out)
     # to visualize output uncomment below
     # cv2.imshow(out.get_image()[:, :, ::-1])
 
@@ -197,10 +215,52 @@ elif args.command == 'inference':
     # print(outputs["instances"].pred_classes)
     # print(outputs["instances"].pred_boxes)
 
+elif args.command == "infer_mask":
+    # Inference should use the config with parameters that are used in training
+    cfg.MODEL.WEIGHTS = args.weights  # path to the weights for inference.
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a custom testing threshold
+    predictor = DefaultPredictor(cfg)
+
+    # adding a timestamp to the images
+    time_out = get_timestamp()
+
+    # # saving the mask for a random image
+    for d in random.sample(dataset_dicts_test, 1):
+        print(d["file_name"])
+        assert os.path.isfile(d["file_name"]), "Image not loaded correctly!"
+        img = cv2.imread(d["file_name"])
+        visualizer = Visualizer(img[:, :, ::-1], metadata=taco_metadata, scale=0.5)
+        out = visualizer.draw_dataset_dict(d)
+
+        # image too large to display - resize down to fit in the screen
+        img_new = out.get_image()[:, :, ::-1]
+        img_resized = ResizeWithAspectRatio(img_new, width=800)
+        cv2.imshow("rand_name", img_resized)  # out.get_image()[:, :, ::-1])
+        cv2.imwrite('./img_out/mask_' + time_out + '.jpg', img_new)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    # # Display the prediction on the same images
+    outputs = predictor(img)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
+    v = Visualizer(img[:, :, ::-1],
+                   metadata=taco_metadata,
+                   scale=0.5,
+                   instance_mode=ColorMode.IMAGE_BW,
+                   )
+    out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+    img_out = out.get_image()  # [:, :, ::-1]
+    # Converting to RGB (fixing for display)
+    img_out = cv2.cvtColor(img_out, cv2.COLOR_BGR2RGB)
+    cv2.imwrite('./img_out/pred_' + time_out + '.jpg',img_out)
+
+    # # Give information about predicted classes and boxes
+    print(outputs["instances"].pred_classes)
+    print(outputs["instances"].pred_boxes)
+
 elif args.command == "predict_coco":
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.0
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.2
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")
     predictor = DefaultPredictor(cfg)
 
