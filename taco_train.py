@@ -89,12 +89,13 @@ register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./d
 
 # Obtaining the dataset catalog for each, train, val and test.
 dataset_dicts_train = DatasetCatalog.get("taco_train")
-#dataset_dicts_test = DatasetCatalog.get("taco_test")
+dataset_dicts_test = DatasetCatalog.get("taco_test")
 dataset_dicts_val = DatasetCatalog.get("taco_val")
 
 # Adding custom test file for ARC Litter dataset
 register_coco_instances("arc_test",{},"./segments/festay_arc_litter/arc_litter-v1.1_coco.json", "./segments/festay_arc_litter/v1.1")
 dataset_dicts_test = DatasetCatalog.get("arc_test")
+arc_metadata = MetadataCatalog.get("arc_test")
 
 taco_metadata = MetadataCatalog.get("taco_train")
 print("datasets registered successfully")
@@ -243,7 +244,7 @@ elif args.command == "infer_mask":
     # # Display the prediction on the same images
     outputs = predictor(img)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
     v = Visualizer(img[:, :, ::-1],
-                   metadata=taco_metadata,
+                   metadata=arc_metadata,
                    scale=0.5,
                    instance_mode=ColorMode.IMAGE_BW,
                    )
