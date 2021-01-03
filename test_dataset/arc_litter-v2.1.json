@@ -1,0 +1,4430 @@
+{
+    "name": "v2.1",
+    "description": "changed labels to match taco styling\nother litter :1\nplastic litter: 2",
+    "created_at": "2021-01-03 12:09:42.643583+00:00",
+    "dataset": {
+        "name": "arc_litter",
+        "description": "dataset of trash for arc litter dataset",
+        "category": "Garden & vegetation",
+        "created_at": "2020-11-30 11:13:16.872125+00:00",
+        "owner": "festay",
+        "tasks": {
+            "segmentation": {
+                "description": "",
+                "task_type": "segmentation-bitmap",
+                "attributes": {
+                    "format_version": "0.1",
+                    "categories": [
+                        {
+                            "name": "plastic litter",
+                            "id": 0
+                        },
+                        {
+                            "name": "other litter",
+                            "id": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "samples": [
+            {
+                "uuid": "8de0cdd1-d2a9-492c-aa6f-249f3bac2449",
+                "name": "interceptor_ma.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/a523b467-c47f-4fe2-9774-761ab9c39f44.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "05be6fc1-91d2-4bcf-abed-2d3068f2a8a1",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {}
+                    }
+                }
+            },
+            {
+                "uuid": "ad0d9bd5-4ef8-4518-815e-d8a2bcbe3b46",
+                "name": "test_img2.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/43b1fea2-5c5e-4ac7-9d79-7f5afd57bc87.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "5df02880-91aa-4a6e-b83a-7bfdb741c077",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {}
+                    }
+                }
+            },
+            {
+                "uuid": "41c90bbe-c1d6-4647-af03-bc9c36998177",
+                "name": "interceptor_dr.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/46106217-dcc8-4fc8-bbef-b839cbd8a120.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "59941708-da29-4c5e-93cd-324149926cd0",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/6f6f7dbd-b77f-4ffd-9db7-c979547a1a95.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "4a514731-5f8f-475e-9968-bef290af9a66",
+                "name": "test_img1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/01b53fd6-f342-4ec4-a135-3fd76d7338c5.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "bdff3541-a6ec-4487-8f78-f1594b8e4fad",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {}
+                    }
+                }
+            },
+            {
+                "uuid": "94d123ed-64df-4952-b554-0e808d730474",
+                "name": "trash_00.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/33cad988-a8cd-4761-992c-78224d4de75e.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "c08edbe2-3b82-490d-9b36-6255e9389ea1",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/e0dc0522-4b35-4de2-bc41-49d8dc718fcc.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "07335075-ba38-414c-9ab4-fd50f69f5722",
+                "name": "trash_02.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/4cbb6001-5448-410a-8d29-55cbb716e1af.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "66c6c753-4277-4538-ba8f-f3489b0c6f74",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/d12f5fb5-b73e-4ea0-8995-86ce8a1be0dc.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "9f89be1d-bab4-46a7-b801-c9da3c7ae2c6",
+                "name": "trash_01.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/c66878fd-013b-4cba-9f07-410fd8cd46bf.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "eb9e9686-775f-4403-baea-719dd6cbed09",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/b40defef-ba44-4ec8-a3f5-855d634706ca.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "386b842c-d9b5-4c1f-b010-0c29ad2d2ad9",
+                "name": "trash_03.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/c8bc87c1-e7a4-4270-92de-a64edf2ad491.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "767f78a8-fa3b-45ca-9969-68dd4e04e31f",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/40fab54d-c835-4c92-8a49-e8c8864220ce.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "32c9cdfc-e5d3-46b3-9c2b-112e38b3fefc",
+                "name": "trash_04_1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/85ee6ac3-e595-4dd8-b841-621f41a9c248.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "c8871e74-f21f-4b74-98eb-eddba2e43ba7",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/4c6a69a3-bf3e-4607-b2e0-99c206f6540e.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "72be9ba6-48dd-474a-88c2-1e897d7f93a8",
+                "name": "trash_05_1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/ef70eae3-9e65-482e-a866-685793a8b661.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "7810b77f-163a-4dce-be9b-53943ed97921",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/666975cb-9259-4983-aa33-bd5416b9acde.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "03026db1-4ad5-4b9d-8c16-4654c6a25fe8",
+                "name": "trash_06_1.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/cdd6f5af-9022-41b6-86f2-fe7a5bf618f1.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "64c2a512-7098-4a11-a1b8-e991188f31b5",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/796568da-afb8-4bc4-9b0e-d1708553ec6a.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "95443f02-bb25-4e10-ae6d-439d15274900",
+                "name": "trash_08.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/4d39f81e-0d0f-49e5-9931-429904931159.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "ac71893c-580b-4147-a520-136422d7b213",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/bfa6e6d5-0754-4676-8582-692189e33e40.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "ded0a425-8e10-4612-83bc-8fdececf8e1c",
+                "name": "trash_07.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/cf9ee285-4ba8-44dc-9281-dab3e8ea0d87.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "d312386a-cc15-4ecd-a2f9-28a54086cd1d",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/8920592e-f627-43bb-931d-bd57308c42d9.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "f364ab24-7d9a-4cb4-9e22-1f5c61683e73",
+                "name": "trash_09.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fd1b239a-e1c4-40a5-b70e-feec568aa012.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "c42bb142-f8f6-42eb-958f-5e3cd9b60f33",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fb0536a5-d3fc-46b4-9bd8-3537f0ecadd5.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "39448ebc-b546-45ea-91da-6cad702a93be",
+                "name": "trash_10.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/436860ac-8d67-4060-94c1-f45d699fe756.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "ded6e209-a124-41f7-afa3-bf7664be43a9",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/821b5413-81d2-42aa-9cbd-ee6dcc0c9a37.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "bd200cd9-3900-4ace-97bd-f6961d9dfa6d",
+                "name": "trash_12.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/16bd16c1-3939-492d-bf7c-f044547a9794.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "0232015d-fea7-44be-a004-17b465f5584a",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/325bf153-0acd-447e-bf59-585c1367cdb9.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "3f4a22ee-70e2-47d5-ac41-b89d97b02f38",
+                "name": "trash_11.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/741aaeeb-aa28-450b-8d3f-c5532a774d84.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "3c7f1057-593d-4328-802d-fd84c238563f",
+                        "label_status": "REVIEWED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/8a7dcf0d-eed3-46b3-a073-9f393c2250eb.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "9609b7d5-ccae-4ade-a509-0ff2d9139994",
+                "name": "trash_leo1_depth.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/338ab5e7-0695-4763-8cda-f803368dcb20.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "d5a0a8ba-e68c-4ff9-a677-1445fa813e97",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {}
+                    }
+                }
+            },
+            {
+                "uuid": "e9c65335-ecc7-4065-90b3-08f8d1692e69",
+                "name": "trash_leo2_depth.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/08eb5625-a040-444d-8ec0-243f825fd017.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "d653e3f2-bb83-4f78-a97b-638c730ed446",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {}
+                    }
+                }
+            },
+            {
+                "uuid": "f0b71d41-002d-4ab8-97cd-2c4250e53d38",
+                "name": "trash_leo1_rgb.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/e5dd713f-cc58-438b-bfa7-8a612d96e163.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "f5fc08d7-30c7-4b2b-90cc-ef69cce760f5",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fd13afd6-2659-4f73-9e49-ac63ffeaccf3.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "204603d5-f0d6-4f7b-8a37-261d89908034",
+                "name": "trash_dino.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/768327f3-4775-4337-9695-9e0bfc758211.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "e64c85af-8843-4c3b-826a-02c9bb581e07",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/d86031d5-5207-4e2e-9127-3e3b5a563c10.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "77757f4b-577a-43f3-b6b7-f4dff6dd85bd",
+                "name": "trash_leo2_rgb.png",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/a84b05f6-282d-4f60-b7f8-aa8edfb7b0d8.png"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "683c4d19-a1c1-420e-b483-53f6765fc8ab",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/7f721b33-c7fa-4f56-ab09-e80a79b89a1f.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "dd648377-b163-407f-8bd4-a1fa346c1653",
+                "name": "trash_wheel.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fa3f3373-5499-4c09-af55-a6452dbda374.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "cac8a704-4a3c-40d0-89a3-63c36093b28e",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {}
+                    }
+                }
+            },
+            {
+                "uuid": "a64fa844-4a00-4ad1-988d-8cbabef15a3d",
+                "name": "trash_wheel2.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/eb6f6683-a2bf-4466-b0e3-6188644f6a71.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "7cb00683-b492-47c4-b577-06f0abac17a4",
+                        "label_status": "SKIPPED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {}
+                    }
+                }
+            },
+            {
+                "uuid": "fe21320c-c68e-4758-a81a-35efd4ee3d8b",
+                "name": "trash_13.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/2d93b3ff-f943-4072-aef6-d5b1562dfbbb.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "ec64539d-7f12-4b03-8759-b6bee5e9dec2",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/cfebbe37-396d-4cdd-b9aa-53dd2f8ca261.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "b1a29a12-72a7-4e91-ab0a-ee0794c09e91",
+                "name": "IMG_20201207_085012.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/aae0c420-c39c-45e5-93f4-75fa8ddee0d5.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "b7057d86-ad4c-4e7a-bc97-02593e2bd595",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/3584d19d-5c7c-43f2-8cec-63f61441b842.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "6feab596-5d10-404f-ab18-5fd467b18841",
+                "name": "IMG_20201207_085141.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/67cb92eb-9ed9-4212-baca-921077c5fffd.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "8581ecc3-009c-44bf-9a64-0f7e30ad3c35",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/1e8e0d1a-11cb-46ba-a01b-62f02c96d191.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "fd069d78-1984-42e9-9169-cc4208127fe2",
+                "name": "IMG_20201207_085113.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/3366a100-e28b-470b-a053-976b04b26e82.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "9af12079-3f1b-48ee-86fd-f3ff5186efcb",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/bb30463a-b7ca-471f-8ff8-ff17d6a33b33.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "10774d56-656a-40c7-bcc1-c1416eb3440a",
+                "name": "IMG_20201207_084853.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/6fa54c8c-3eda-4544-b2b6-a42122cd6d31.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "52433cd5-1201-4330-81c5-be5a2065e7b2",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 45,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 46,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 47,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 48,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 49,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 50,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 51,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 52,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 53,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 54,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 55,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 56,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/7ff7a121-1d83-491a-96cd-7051592a4c6b.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "a34fa729-7e4f-4505-807a-96a98ffe2155",
+                "name": "IMG_20201207_084656.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/6f9b0f2b-f0d3-49f9-bc29-84bce745d895.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "d710683b-d1f6-4c80-b03a-47b95f5ea3df",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 45,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 46,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 47,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 48,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/23b23a13-b38f-4287-9264-d37788be6129.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "cf935fce-6b48-4bac-b6f4-96d033520014",
+                "name": "IMG_20201207_084351.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/1748086e-3de9-41a0-bb44-41427cd42b5f.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "5a916411-86e1-4d7e-9b25-f0ee0399ddd2",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/9e7dcc80-fdc4-4b77-aaa8-94e55c8692b1.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "17345c5e-505d-435d-a594-360a6ef8f301",
+                "name": "IMG_20201207_084613.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/9f6b7291-5032-4cfc-b0a2-155693afbfa2.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "a84955f9-c8f0-4d3c-9c95-da8423b693b2",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 45,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 46,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 47,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 48,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/03060532-9621-4c2b-a561-01eeed53ae33.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "877f87f2-036d-42b1-9088-bdeab37c6238",
+                "name": "IMG_20201207_084517.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/b14d8cc2-1559-4793-a443-8a008d70410c.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "e535e5cf-537e-4fb8-88eb-3b07471cf6ae",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 45,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 46,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 47,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 48,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 49,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 50,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 51,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 52,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/2f9f5fa0-a882-4e24-995e-dc254dc2f280.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "6310201d-6961-4b68-a38c-409d5adc69a4",
+                "name": "IMG_20201207_084250.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/902e2040-00f1-4169-918c-2b0f9d26a892.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "b7efd27f-bd77-4ebd-8024-238b68bebe63",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/fd4d7b37-1dcc-4a1e-873a-ffcadb038a59.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "2519d59c-1bbb-4fb3-8b79-b8f8de866d3c",
+                "name": "IMG_20201207_084307.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/1e12820e-cd42-42a5-ad3b-a1b3b573ee68.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "effa7d98-db54-4bdc-91ff-b914829f1435",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/530587d8-d3b6-42fa-bd2c-470b9d722adc.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "01a8cc7e-b06d-48c9-81c6-8188396ff7fb",
+                "name": "IMG_20201207_084202.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/f9227ce9-66ba-438e-83b3-8645003e352d.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "afc995e2-93f6-419e-80c6-d9a8c0ce8096",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/919f610f-adb8-4781-9f4d-77ce323e41ad.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "e8949c68-293b-4cf4-a21e-51c4a808562d",
+                "name": "IMG_20201207_084105.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/0d47f367-985e-4047-b6d9-29d05fd58ee7.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "c2ff6443-49ac-4de1-8588-468981578f08",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/a5eb6725-616d-467d-a4af-09b8cbe3c60d.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "cb88999b-2c77-4c9a-b028-e467320cf540",
+                "name": "IMG_20201207_083946.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/36627657-23d5-4a50-9ce8-587463718c03.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "6d99b033-c0ed-4150-8471-0b8d61169ac8",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/8c33f942-f42e-46aa-830d-c18def64155f.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "a3d44688-b4b7-40fd-ad6d-649b6ff49fb9",
+                "name": "IMG_20201207_084019.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/20f84136-a218-43b7-8865-0a6423838340.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "29d68695-069e-49d2-a19d-a4a6051da250",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/7fb0cde0-bfe6-429f-8fcd-ba84317cd7d8.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "d785c1d4-25cd-4f1f-b697-221e6ab93f65",
+                "name": "IMG_20201207_083912.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/0430bc75-6764-4d1c-ac85-33c4e0a1a4dd.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "d18b67b2-9f5e-4d17-9eb6-666ec4beede5",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/ad895026-8e1d-479a-97bc-313de8042f9f.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "a2b06e55-0dbc-4721-a85e-481289ed2868",
+                "name": "IMG_20201207_083833.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/8d50a1ca-1c6d-49ea-aaf7-51841b98aadf.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "92fa6fe2-1409-478b-8f2f-5ab29501b3a1",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/ddad9fd0-2910-47c7-b5a2-b2dcb8028248.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "0e27d275-94de-4d07-9bf1-2e08058aa269",
+                "name": "IMG_20201207_083800.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/df8b7a62-db7d-4537-b870-009f5bbcf996.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "48098493-0365-47fa-9f33-e0bf377309fb",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/6fac5fc8-1b9c-47fa-a8ad-fe37525add08.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "6a63d2c2-873f-456c-b6b4-81dd07021550",
+                "name": "IMG_20201207_083548.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/917dbf39-bce6-421d-a507-2f67615a9f75.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "24c030b4-a236-4057-8449-b83d16c9fbcd",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 45,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/3763be3d-5dff-4768-8576-98356a98824a.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "974dce6c-1fcf-4732-b5a2-25a745cfd65b",
+                "name": "IMG_20201207_083219.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/c640925f-3365-4560-8d95-5f0ef6e7b711.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "684ec87d-4df1-4e86-bac2-dcc5453a2cd6",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/4105ae88-22d8-4f45-a83a-573cda5a4adf.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "52548a2f-2261-4986-9c95-c1d42d6fcd56",
+                "name": "IMG_20201207_083408.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/cb6c08e5-cae9-4c38-b719-ed48981d7e1b.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "fc2eb0ab-b7bb-47c4-9242-f0128d2ec157",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 45,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 46,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 47,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/220e9270-8329-412b-9c41-f01eafb192e5.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "69c8e3a0-f06e-418e-b61f-0fdaf81928b6",
+                "name": "IMG_20201207_083151.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/e85ebd0d-b7ea-4936-963c-71b1b9b49d27.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "f2170b6f-1e35-45cc-a1f7-1a27a85867f5",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 25,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 26,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 27,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 28,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 29,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 30,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 31,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 32,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 33,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 34,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 35,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 36,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 37,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 38,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 39,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 40,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 41,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 42,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 43,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 44,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 45,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 46,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 47,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 48,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 49,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 50,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 51,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 52,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 53,
+                                    "category_id": 0
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/1b6fe623-3767-4503-965e-136b272d2433.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "50802820-e071-4103-99bb-fea1fc80f6f2",
+                "name": "IMG_20201207_083023.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/9951677c-34f4-47ef-8c70-a298cb22c169.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "e34f85d9-768f-4e3d-ad68-6155b4147a49",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 21,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 22,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 23,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 24,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/d4f4be3e-e566-414f-9b3f-3d6387628d37.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "b8ff67d2-7a0a-44d9-8794-cdc2db3d4142",
+                "name": "IMG_20201207_082958.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/d70b4433-179e-494b-9d66-32bae39562e7.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "65ba41a6-f72e-4c2d-bb63-fd854ac72f03",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 16,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 17,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 18,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 19,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 20,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/a7c03f95-92c4-4531-b2b5-3ebed4c7dc2e.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "8157bc02-3cfe-438a-829d-ce61081e7065",
+                "name": "IMG_20201207_082808.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/c62a54ce-fbbf-4f19-8565-336ab91f4a43.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "80e249b7-400a-4b26-b0ef-54d5312c78e4",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/1f218b0c-d921-4b2c-8e2e-2a4db6209f37.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "f9e88908-537b-42b0-9229-c7a130df7927",
+                "name": "IMG_20201207_082456.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/9688a96c-1b3c-4962-9253-a2cce4709e75.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "24936196-f8d9-46ae-8af2-4780d656288e",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/3b135b19-d26c-4fb9-a377-cc0d25b6ee94.png"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "uuid": "e50cf01b-ffa9-4b38-81a1-590bee4fa1c9",
+                "name": "IMG_20201207_082914.jpg",
+                "data_type": "IMAGE",
+                "attributes": {
+                    "image": {
+                        "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/e460e8e1-df94-48b5-8b04-e89fd6b0f7f4.jpg"
+                    }
+                },
+                "labels": {
+                    "segmentation": {
+                        "uuid": "ee0d05d9-2fba-40a2-b9b1-710921a460d7",
+                        "label_status": "LABELED",
+                        "label_type": "segmentation-bitmap",
+                        "attributes": {
+                            "format_version": "0.1",
+                            "annotations": [
+                                {
+                                    "id": 1,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 2,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 3,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 4,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 6,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "category_id": 0
+                                },
+                                {
+                                    "id": 12,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 13,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 14,
+                                    "category_id": 1
+                                },
+                                {
+                                    "id": 15,
+                                    "category_id": 1
+                                }
+                            ],
+                            "segmentation_bitmap": {
+                                "url": "https://segmentsai-prod.s3.eu-west-2.amazonaws.com/assets/festay/f4a791f5-d3bf-4095-b60a-d28bb6850593.png"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

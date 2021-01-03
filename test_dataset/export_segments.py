@@ -23,11 +23,10 @@ from segments.utils import export_dataset
 #export_dataset(dataset, 'coco')
 
 
-
 # # Alternatively, if obtained directly from a local file.
 # pip install segments-ai --upgrade
 from segments import SegmentsDataset
-release_file = "/home/fidel/git/arcnet/test_dataset/arc_litter-v1.1.json"
+release_file = "/home/fidel/git/arcnet/test_dataset/arc_litter-v2.1.json"
 dataset = SegmentsDataset(release_file, task='segmentation', filter_by=['labeled', 'reviewed'])
 export_dataset(dataset, 'coco')
 

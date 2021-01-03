@@ -32,6 +32,9 @@ NOTES on Implementation:
     #    TEMPLATE: python arcnet_main.py inference --image_path <path/to/test_image.jpg> --weights <path_to/weights.pth>
     #    EXAMPLE:  python arcnet_main.py inference --image_path img_test/trash_01.jpg --weights output/taco_3000.pth
 
+    # Infering on an image and the Mask of the image. Predicts random image and shows its mask for the test dataset
+    #              python arcnet_main.py infer_mask --weights output/taco_3000.pth
+
      # Check Tensorboard for model training validation information.
      tensorboard --logdir ./output/
 
@@ -66,7 +69,7 @@ parser.add_argument('--class_map', required=False, metavar="/path/file.csv", hel
 parser.add_argument('--image_path', required=False, default='./img_test/test_img1.jpg',  metavar="/path/file.jpg", help='Test image')
 parser.add_argument('--data_dir', required=False, default='./data', metavar="/path_to_data/", help='Dataset directory')
 parser.add_argument("command", metavar="<command>",help="Opt: 'train', 'test', 'inference")
-parser.add_argument('--weights', required=False, default='./output/model_final.pth', metavar="/trained_weights.pth", help='weights')
+parser.add_argument('--weights', required=False, default='./output/taco_500_arc.pth', metavar="/trained_weights.pth", help='weights')
 args = parser.parse_args()
 
 # TODO Create new train/test/val split for training every time this script is called.
@@ -89,11 +92,11 @@ register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./d
 
 # Obtaining the dataset catalog for each, train, val and test.
 dataset_dicts_train = DatasetCatalog.get("taco_train")
-dataset_dicts_test = DatasetCatalog.get("taco_test")
+#dataset_dicts_test = DatasetCatalog.get("taco_test")
 dataset_dicts_val = DatasetCatalog.get("taco_val")
 
 # Adding custom test file for ARC Litter dataset
-register_coco_instances("arc_test",{},"./segments/festay_arc_litter/arc_litter-v1.1_coco.json", "./segments/festay_arc_litter/v1.1")
+register_coco_instances("arc_test",{},"./segments/festay_arc_litter/arc_litter-v2.1_coco2.json", "./segments/festay_arc_litter/v2.1")
 dataset_dicts_test = DatasetCatalog.get("arc_test")
 arc_metadata = MetadataCatalog.get("arc_test")
 
@@ -115,6 +118,21 @@ for d in random.sample(dataset_dicts_train, 1):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+# verify the custom test dataset was imported successfully by loading some images
+for d in random.sample(dataset_dicts_test, 1):
+    print(d["file_name"])
+    assert os.path.isfile(d["file_name"]), "Image not loaded correctly!"
+    img = cv2.imread(d["file_name"])
+    visualizer = Visualizer(img[:, :, ::-1], metadata=arc_metadata, scale=0.5)
+    out = visualizer.draw_dataset_dict(d)
+
+    # image too large to display - resize down to fit in the screen
+    img_new = out.get_image()[:, :, ::-1]
+    img_resized = ResizeWithAspectRatio(img_new, width=800)
+    cv2.imshow("rand_name", img_resized)# out.get_image()[:, :, ::-1])
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
 
 # Training custom dataset
 cfg = get_cfg()
@@ -122,13 +140,13 @@ cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rc
 cfg.DATASETS.TRAIN = ("taco_train",)
 # Validation Set (ignoring wrong naming convention)
 cfg.DATASETS.TEST = ("arc_test",)
-cfg.TEST.EVAL_PERIOD = 60
+cfg.TEST.EVAL_PERIOD = 100
 
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
 cfg.SOLVER.BASE_LR = 0.0025  # Starting lr. Adaptive.
-cfg.SOLVER.MAX_ITER = 600
+cfg.SOLVER.MAX_ITER = 800
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
@@ -136,22 +154,31 @@ os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 # Freeze the first several stages so they are not trained.
 # There are 5 stages in ResNet. The first is a convolution, and the following
 # stages are each group of residual blocks.
-cfg.MODEL.BACKBONE.FREEZE_AT = 4 #default is 4
+cfg.MODEL.BACKBONE.FREEZE_AT = 0 #default is 2
+
+# Getting mAP calculation from Train loop
+train_continue = "FALSE" # Make this a passable argument #TODO
+if train_continue == "TRUE":
+    cfg.SOLVER.MAX_ITER = 1
+    cfg.TEST.EVAL_PERIOD = 1
 
 # default trainer, does not include validation loss. Custom coco trainer created to tackle this.
 #trainer = DefaultTrainer(cfg)
-
 # Training with custom validation loss trainer CocoTrainer.py
 from CocoTrainer import CocoTrainer
 trainer = CocoTrainer(cfg)
-trainer.resume_or_load(resume=False)
+if train_continue == "TRUE":
+    # Receives the last checkpoint from the "output directory"
+    trainer.resume_or_load(resume=True)
+else:
+    trainer.resume_or_load(resume=False)
 
 if args.command == "train":
     trainer.train()
 
 elif args.command == 'test':
     # Inference should use the config with parameters that are used in training
-    cfg.MODEL.WEIGHTS = args.weights # os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
+    cfg.MODEL.WEIGHTS = args.weights # os.path.join(cfg.OUTPUT_DIR, "taco_500_arc.pth")
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
@@ -159,7 +186,7 @@ elif args.command == 'test':
         im = cv2.imread(d["file_name"])
         outputs = predictor(im)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
         v = Visualizer(im[:, :, ::-1],
-                       metadata=taco_metadata,
+                       metadata=arc_metadata,
                        scale=0.5,
                        instance_mode=ColorMode.IMAGE_BW
                        # remove the colors of unsegmented pixels. This option is only available for segmentation models
@@ -175,12 +202,14 @@ elif args.command == 'test':
         cv2.destroyAllWindows()
 
     # Evaluating model performance on TEST set.
-    evaluator = COCOEvaluator("arc_test", ("bbox", "segm"), True, output_dir="./output/")
-    val_loader = build_detection_test_loader(cfg, 'arc_test')
+    evaluator_dataset = "arc_test"
+    evaluator = COCOEvaluator(evaluator_dataset, ("bbox", "segm"), True, output_dir="./output/")
+    #val_loader = build_detection_test_loader(cfg, evaluator_dataset)
+    #inference_on_dataset(trainer.model, val_loader, evaluator)
 
-    inference_on_dataset(trainer.model, val_loader, evaluator)
+
     # another equivalent way to evaluate the model is to use `trainer.test`
-
+    trainer.test(cfg,trainer.model,evaluator)
 
 elif args.command == 'inference':
     print(args.image_path)
@@ -225,12 +254,12 @@ elif args.command == "infer_mask":
     # adding a timestamp to the images
     time_out = get_timestamp()
 
-    # # saving the mask for a random image
+    # # saving the mask for a random image in the test dataset
     for d in random.sample(dataset_dicts_test, 1):
         print(d["file_name"])
         assert os.path.isfile(d["file_name"]), "Image not loaded correctly!"
         img = cv2.imread(d["file_name"])
-        visualizer = Visualizer(img[:, :, ::-1], metadata=taco_metadata, scale=0.5)
+        visualizer = Visualizer(img[:, :, ::-1], metadata=arc_metadata, scale=0.5)
         out = visualizer.draw_dataset_dict(d)
 
         # image too large to display - resize down to fit in the screen
@@ -244,7 +273,7 @@ elif args.command == "infer_mask":
     # # Display the prediction on the same images
     outputs = predictor(img)  # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
     v = Visualizer(img[:, :, ::-1],
-                   metadata=arc_metadata,
+                   metadata=taco_metadata,
                    scale=0.5,
                    instance_mode=ColorMode.IMAGE_BW,
                    )
