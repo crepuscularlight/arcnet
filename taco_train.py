@@ -95,7 +95,7 @@ dataset_dicts_train = DatasetCatalog.get("taco_train")
 #dataset_dicts_test = DatasetCatalog.get("taco_test")
 dataset_dicts_val = DatasetCatalog.get("taco_val")
 
-# Adding custom test file for ARC Litter dataset
+# Adding custom test file for ARC Litter dataset. NOTE: ...coco2.json was modified to match taco format for label ids.
 register_coco_instances("arc_test",{},"./segments/festay_arc_litter/arc_litter-v2.1_coco2.json", "./segments/festay_arc_litter/v2.1")
 dataset_dicts_test = DatasetCatalog.get("arc_test")
 arc_metadata = MetadataCatalog.get("arc_test")
@@ -140,13 +140,13 @@ cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rc
 cfg.DATASETS.TRAIN = ("taco_train",)
 # Validation Set (ignoring wrong naming convention)
 cfg.DATASETS.TEST = ("arc_test",)
-cfg.TEST.EVAL_PERIOD = 100
+cfg.TEST.EVAL_PERIOD = 25
 
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
-cfg.SOLVER.BASE_LR = 0.0025  # Starting lr. Adaptive.
-cfg.SOLVER.MAX_ITER = 800
+cfg.SOLVER.BASE_LR = 0.001  # Starting lr. Adaptive.
+cfg.SOLVER.MAX_ITER = 1000
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
@@ -154,7 +154,7 @@ os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 # Freeze the first several stages so they are not trained.
 # There are 5 stages in ResNet. The first is a convolution, and the following
 # stages are each group of residual blocks.
-cfg.MODEL.BACKBONE.FREEZE_AT = 0 #default is 2
+cfg.MODEL.BACKBONE.FREEZE_AT = 1 # default is 2
 
 # Getting mAP calculation from Train loop
 train_continue = "FALSE" # Make this a passable argument #TODO
@@ -164,9 +164,13 @@ if train_continue == "TRUE":
 
 # default trainer, does not include validation loss. Custom coco trainer created to tackle this.
 #trainer = DefaultTrainer(cfg)
-# Training with custom validation loss trainer CocoTrainer.py
+# Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
 from CocoTrainer import CocoTrainer
 trainer = CocoTrainer(cfg)
+
+
+#from MyTrainer import MyTrainer
+#trainer = MyTrainer(cfg)
 if train_continue == "TRUE":
     # Receives the last checkpoint from the "output directory"
     trainer.resume_or_load(resume=True)
