@@ -160,6 +160,7 @@ for d in random.sample(dataset_dicts_val, 1):
 from detectron2.engine import HookBase
 from detectron2.data import build_detection_train_loader
 import detectron2.utils.comm as comm
+
 import torch
 
 class ValidationLoss(HookBase):
@@ -191,13 +192,13 @@ cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rc
 cfg.DATASETS.TRAIN = ("taco_train",)
 cfg.DATASETS.VAL = ("taco_val",)
 cfg.DATASETS.TEST = ("arc_test",)
-cfg.TEST.EVAL_PERIOD = 100
+cfg.TEST.EVAL_PERIOD = 50
 
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
-cfg.SOLVER.BASE_LR = 0.001  # Starting lr. Adaptive.
-cfg.SOLVER.MAX_ITER = 100
+cfg.SOLVER.BASE_LR = 0.01  # Starting lr. Adaptive.
+cfg.SOLVER.MAX_ITER = 1500
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = args.class_num  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
@@ -205,7 +206,7 @@ os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 # Freeze the first several stages so they are not trained.
 # There are 5 stages in ResNet. The first is a convolution, and the following
 # stages are each group of residual blocks.
-cfg.MODEL.BACKBONE.FREEZE_AT = 1 # default is 2
+cfg.MODEL.BACKBONE.FREEZE_AT = 2 # default is 2
 
 # Getting mAP calculation from Train loop
 train_continue = "FALSE" # Make this a passable argument #TODO
@@ -215,12 +216,10 @@ if train_continue == "TRUE":
 
 # default trainer, does not include test or val loss. Custom coco trainer created to tackle this.
 #trainer = DefaultTrainer(cfg)
+
 # Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
 from CocoTrainer import CocoTrainer
 trainer = CocoTrainer(cfg)
-
-
-
 
 if train_continue == "TRUE":
     # Receives the last checkpoint from the "output directory"
@@ -247,7 +246,6 @@ if args.command == "train_val2":
     trainer._hooks = trainer._hooks[:-2] + trainer._hooks[-2:][::-1]
     trainer.resume_or_load(resume=False)
     trainer.train()
-
 
 elif args.command == 'test':
     # Inference should use the config with parameters that are used in training
@@ -312,7 +310,9 @@ elif args.command == 'inference':
 
     cv2.imwrite('./img_out/prediction'+time_out+"_at_" + str(cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST) +'.jpg', img_out)
     # to visualize output uncomment below
-    # cv2.imshow(out.get_image()[:, :, ::-1])
+    cv2.imshow("randoname", out.get_image()[:, :, ::-1])
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     # # Give information about predicted classes and boxes
     # print(outputs["instances"].pred_classes)
