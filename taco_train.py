@@ -21,8 +21,8 @@ NOTES on Implementation:
     #           python split_dataset.py --nr_trials <K_folds> --out_name <name of file> --dataset_dir <path_to_data>
 
     # To train the model:
-    #    Template: python arcnet_main.py --class_map <mapto_class.csv> --data_dir <path_to_dataset/> train
-    #    EXAMPLE:  python arcnet_main.py --class_map maps/map_to_2.csv --data_dir data train
+    #    Template: python arcnet_main.py --class_num <number of classes> --data_dir <path_to_dataset/> train
+    #    EXAMPLE:  python arcnet_main.py --class_num 1 --data_dir data train --ann_train ann_0_map1train.json --ann_val ann_0_map1val.json
 
     # To test the model:
     #    Template:  python arcnet_main.py test --weights <path_to/weigts.pth>
@@ -65,27 +65,37 @@ from detectron2.data import build_detection_test_loader
 
 # Parsing global arguments
 parser = argparse.ArgumentParser(description='Custom implementation of Detectron2 using the TACO dataset.')
-parser.add_argument('--class_map', required=False, metavar="/path/file.csv", help='Target classes')
-parser.add_argument('--image_path', required=False, default='./img_test/test_img1.jpg',  metavar="/path/file.jpg", help='Test image')
+parser.add_argument('--class_num', required=True, type=int, metavar="Number of classes", help='Number of target classes')
+parser.add_argument('--image_path', required=False, default='./img_test/test_img1.jpg',  metavar="/path/file.jpg", help='Test image path')
 parser.add_argument('--data_dir', required=False, default='./data', metavar="/path_to_data/", help='Dataset directory')
 parser.add_argument("command", metavar="<command>",help="Opt: 'train', 'test', 'inference")
-parser.add_argument('--weights', required=False, default='./output/taco_500_arc.pth', metavar="/trained_weights.pth", help='weights')
+parser.add_argument('--weights', required=False, default='./output/taco_500_arc.pth', metavar="/trained_weights.pth", help='weights used for inference')
+parser.add_argument('--ann_train', required=False, metavar="file.json", help='Train Data Annotations')
+parser.add_argument('--ann_test', required=False, metavar="file.json", help='Test Data Annotations')
+parser.add_argument('--ann_val', required=False, metavar="file.json", help='Validation Data Annotations')
 args = parser.parse_args()
 
-# TODO Create new train/test/val split for training every time this script is called.
+# TODO Include 5-Fold cross validation when using data split.
 
 # Registering the custom dataset using Detectron2 libraries
 
-# TODO load train test and val data directly from the run commands (not hardcoded)
+# TODO: load train, test, and val data directly from the run commands (not hardcoded)
 # gets the annotation directly from the train set.
-#class_map_name = args.class_map.split("/")[-1].split(".")[-2]
 
-# Registering with 2 classes - map_to_2 annotations
-register_coco_instances("taco_train",{},"./data/annotations_0_map_2_train.json","./data")
-register_coco_instances("taco_test",{},"./data/annotations_0_map_2_test.json","./data")
-register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./data")
+# Registering "class_num" many classes and their respective datasets. Train/Val on Taco, Test on ARC.
+register_coco_instances("taco_train",{},args.data_dir+"/"+args.ann_train, args.data_dir)
+register_coco_instances("taco_val",{},args.data_dir+"/"+args.ann_val, args.data_dir)
+# Adding custom test file for ARC Litter dataset. NOTE: ...coco2.json was modified to match taco format for label ids.
+# Test file is static. Load the corresponding number of classes.
+register_coco_instances("arc_test",{},"./segments/festay_arc_litter/arc_litter-v2.1_coco"+ str(args.class_num)+".json", "./segments/festay_arc_litter/v2.1")
 
-# Registering with standard TACO annotations - 60 classes.
+# # Alternative Configurations
+# Registering with 2 classes - map_to_2 annotations (Hardcoded)
+#register_coco_instances("taco_train",{},"./data/annotations_0_map_2_train.json","./data")
+#register_coco_instances("taco_test",{},"./data/annotations_0_map_2_test.json","./data")
+#register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./data")
+
+# Registering with standard TACO annotations - 60 classes. (Hardcoded)
 #register_coco_instances("taco_train",{},"./data/annotations_0__train.json","./data")
 #register_coco_instances("taco_test",{},"./data/annotations_0__test.json","./data")
 #register_coco_instances("taco_val",{},"./data/annotations_0__val.json","./data")
@@ -94,12 +104,10 @@ register_coco_instances("taco_val",{},"./data/annotations_0_map_2_val.json","./d
 dataset_dicts_train = DatasetCatalog.get("taco_train")
 #dataset_dicts_test = DatasetCatalog.get("taco_test")
 dataset_dicts_val = DatasetCatalog.get("taco_val")
-
-# Adding custom test file for ARC Litter dataset. NOTE: ...coco2.json was modified to match taco format for label ids.
-register_coco_instances("arc_test",{},"./segments/festay_arc_litter/arc_litter-v2.1_coco2.json", "./segments/festay_arc_litter/v2.1")
 dataset_dicts_test = DatasetCatalog.get("arc_test")
-arc_metadata = MetadataCatalog.get("arc_test")
 
+# Registering Metadatas
+arc_metadata = MetadataCatalog.get("arc_test")
 taco_metadata = MetadataCatalog.get("taco_train")
 print("datasets registered successfully")
 
@@ -114,7 +122,7 @@ for d in random.sample(dataset_dicts_train, 1):
     # image too large to display - resize down to fit in the screen
     img_new = out.get_image()[:, :, ::-1]
     img_resized = ResizeWithAspectRatio(img_new, width=800)
-    cv2.imshow("rand_name", img_resized)# out.get_image()[:, :, ::-1])
+    cv2.imshow("train image", img_resized)# out.get_image()[:, :, ::-1])
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -129,26 +137,69 @@ for d in random.sample(dataset_dicts_test, 1):
     # image too large to display - resize down to fit in the screen
     img_new = out.get_image()[:, :, ::-1]
     img_resized = ResizeWithAspectRatio(img_new, width=800)
-    cv2.imshow("rand_name", img_resized)# out.get_image()[:, :, ::-1])
+    cv2.imshow("test image", img_resized)# out.get_image()[:, :, ::-1])
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+# verify the custom test dataset was imported successfully by loading some images
+for d in random.sample(dataset_dicts_val, 1):
+    print(d["file_name"])
+    assert os.path.isfile(d["file_name"]), "Image not loaded correctly!"
+    img = cv2.imread(d["file_name"])
+    visualizer = Visualizer(img[:, :, ::-1], metadata=taco_metadata, scale=0.5)
+    out = visualizer.draw_dataset_dict(d)
+
+    # image too large to display - resize down to fit in the screen
+    img_new = out.get_image()[:, :, ::-1]
+    img_resized = ResizeWithAspectRatio(img_new, width=800)
+    cv2.imshow("val image", img_resized)# out.get_image()[:, :, ::-1])
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+# Custom Validation # 1
+from detectron2.engine import HookBase
+from detectron2.data import build_detection_train_loader
+import detectron2.utils.comm as comm
+import torch
+
+class ValidationLoss(HookBase):
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg.clone()
+        self.cfg.DATASETS.TRAIN = cfg.DATASETS.VAL
+        self._loader = iter(build_detection_train_loader(self.cfg))
+
+    def after_step(self):
+        data = next(self._loader)
+        with torch.no_grad():
+            loss_dict = self.trainer.model(data)
+
+            losses = sum(loss_dict.values())
+            assert torch.isfinite(losses).all(), loss_dict
+
+            loss_dict_reduced = {"val_" + k: v.item() for k, v in
+                                 comm.reduce_dict(loss_dict).items()}
+            losses_reduced = sum(loss for loss in loss_dict_reduced.values())
+            if comm.is_main_process():
+                self.trainer.storage.put_scalars(total_val_loss=losses_reduced,
+                                                 **loss_dict_reduced)
 
 
 # Training custom dataset
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
 cfg.DATASETS.TRAIN = ("taco_train",)
-# Validation Set (ignoring wrong naming convention)
+cfg.DATASETS.VAL = ("taco_val",)
 cfg.DATASETS.TEST = ("arc_test",)
-cfg.TEST.EVAL_PERIOD = 25
+cfg.TEST.EVAL_PERIOD = 100
 
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
 cfg.SOLVER.BASE_LR = 0.001  # Starting lr. Adaptive.
-cfg.SOLVER.MAX_ITER = 1000
+cfg.SOLVER.MAX_ITER = 100
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
-cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
+cfg.MODEL.ROI_HEADS.NUM_CLASSES = args.class_num  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 
 # Freeze the first several stages so they are not trained.
@@ -162,15 +213,15 @@ if train_continue == "TRUE":
     cfg.SOLVER.MAX_ITER = 1
     cfg.TEST.EVAL_PERIOD = 1
 
-# default trainer, does not include validation loss. Custom coco trainer created to tackle this.
+# default trainer, does not include test or val loss. Custom coco trainer created to tackle this.
 #trainer = DefaultTrainer(cfg)
 # Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
 from CocoTrainer import CocoTrainer
 trainer = CocoTrainer(cfg)
 
 
-#from MyTrainer import MyTrainer
-#trainer = MyTrainer(cfg)
+
+
 if train_continue == "TRUE":
     # Receives the last checkpoint from the "output directory"
     trainer.resume_or_load(resume=True)
@@ -178,7 +229,25 @@ else:
     trainer.resume_or_load(resume=False)
 
 if args.command == "train":
+    # trainer = Trainer(cfg) # From https://github.com/facebookresearch/detectron2/issues/810
+    val_loss = ValidationLoss(cfg)
+    trainer.register_hooks([val_loss])
+    # swap the order of PeriodicWriter and ValidationLoss
+    trainer._hooks = trainer._hooks[:-2] + trainer._hooks[-2:][::-1]
+    trainer.resume_or_load(resume=False)
     trainer.train()
+
+if args.command == "train_val2":
+    from MyTrainer import MyTrainer
+    trainer = MyTrainer(cfg)
+    from LossEvalHook import LossEvalHook
+    val_loss = LossEvalHook(cfg)
+    trainer.register_hooks([val_loss])
+    # swap the order of PeriodicWriter and ValidationLoss
+    trainer._hooks = trainer._hooks[:-2] + trainer._hooks[-2:][::-1]
+    trainer.resume_or_load(resume=False)
+    trainer.train()
+
 
 elif args.command == 'test':
     # Inference should use the config with parameters that are used in training

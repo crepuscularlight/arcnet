@@ -2,6 +2,7 @@
 This script takes a dataset in coco format (json file) and returns three datasets with train-test-val splits.
 To run (for ARC application example)
     python split_dataset.py --dataset_dir data --out_name map_2  --nr_trials 1
+    number of trials corresponds to the number of distinct datasets (for K-Fold cross val)
 """
 
 import os.path
@@ -18,11 +19,11 @@ parser.add_argument('--test_percentage', type=int, default=10, required=False, h
 parser.add_argument('--val_percentage', type=int, default=10, required=False, help='Percentage of images used for the validation set')
 parser.add_argument('--out_name', type=str, default='', required=False, help='renaming output file')
 parser.add_argument('--nr_trials', type=int, default=1, required=False, help='Number of splits')
+parser.add_argument('--ann_file', type=str, default='annotations_map_2.json', required=False, help='Annotation file name ann_file.json')
 args = parser.parse_args()
 
-# TODO remove hardcoded annotation input path (possibly combine with remapping function)
-ann_input_path = args.dataset_dir + '/' + 'annotations_map_2.json'
-ann_input_path = args.dataset_dir + '/' + 'annotations.json'
+assert args.ann_file.split('.')[-1].lower() == 'json', 'Annotations must be a .json file format. ' #Verify the file is a json file.
+ann_input_path = args.dataset_dir + '/' + args.ann_file
 
 # Load annotations
 with open(ann_input_path, 'r') as f:
@@ -36,7 +37,6 @@ nr_images = len(imgs)
 
 nr_testing_images = int(nr_images*args.test_percentage*0.01+0.5)
 nr_nontraining_images = int(nr_images*(args.test_percentage+args.val_percentage)*0.01+0.5)
-
 
 for i in range(args.nr_trials):
     random.shuffle(imgs)
@@ -87,9 +87,9 @@ for i in range(args.nr_trials):
             train_set['scene_annotations'].append(ann)
 
     # Write dataset splits
-    ann_train_out_path = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + 'train.json'
-    ann_val_out_path   = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + 'val.json'
-    ann_test_out_path  = args.dataset_dir + '/' + 'annotations_' + str(i) + "_" + args.out_name + 'test.json'
+    ann_train_out_path = args.dataset_dir + '/' + 'ann_' + str(i) + "_" + args.out_name + 'train.json'
+    ann_val_out_path   = args.dataset_dir + '/' + 'ann_' + str(i) + "_" + args.out_name + 'val.json'
+    ann_test_out_path  = args.dataset_dir + '/' + 'ann_' + str(i) + "_" + args.out_name + 'test.json'
 
     with open(ann_train_out_path, 'w+') as f:
         f.write(json.dumps(train_set))
@@ -101,3 +101,4 @@ for i in range(args.nr_trials):
         f.write(json.dumps(test_set))
 
 
+print('Datasets created successfully!')

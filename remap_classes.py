@@ -96,7 +96,7 @@ def remap_classes(dataset, class_map):
 
     # Saving the newly created file as a JSON file
     num_classes = str(len(class_new_names))
-    ann_out_path = './data' + '/' + 'annotations_'+ 'map_to_' + num_classes +'.json'
+    ann_out_path = './data' + '/' + 'ann_'+ 'map_to_' + num_classes +'.json'
     with open(ann_out_path, 'w+') as f:
         f.write(json.dumps(dataset))
 
@@ -106,10 +106,10 @@ if __name__ == '__main__':
     """
     remap classes of custom dataset 
     Args:
-        - class map-> path to csv file containing dictionary of mapped classes (original,new)
-        - annotaions -> path to json file containing original annotations in COCO format
+        - class map-> path to csv file containing dictionary of mapped classes. File format: (original,new)
+        - annotations -> path to json file containing original annotations in COCO format
     Returns:
-        - JSON file with dataset. 
+        - JSON file with remapped dataset. 
     """
     # Parsing global arguments
     parser = argparse.ArgumentParser(description='Class remapper for TACO dataset')
@@ -117,7 +117,7 @@ if __name__ == '__main__':
     parser.add_argument('--ann_dir', required=False, metavar='/path_to_anns/annotation.json', help='path to .json')
     args = parser.parse_args()
 
-    # Load class map
+    # Load class map, default is two classes used for the ARC project
     if args.class_map is not None:
         class_map_path = args.class_map
     else:
@@ -134,13 +134,13 @@ if __name__ == '__main__':
     if args.ann_dir is not None:
         ann_input_path = args.ann_dir
     else:
-        ann_input_path = './data/annotations.json'  # Default is set to two classes: [plastic litter, other litter]
+        ann_input_path = './data/annotations.json'  # Original TACO annotations with 64 classes
 
     # Creating the json file dataset
     assert os.path.isfile(ann_input_path), "Annotations file not found!"
     with open(ann_input_path, 'r') as f:
         dataset = json.loads(f.read())
 
-    # Creating the new mapped dataset json file. Output of this function is the creation of a new file.
+    # Creating the new mapped dataset json file. Output of this function is the creation of a new file in the running directory.
     remapped_json_path = remap_classes(dataset, class_map)
     print(f'New dataset created.\nSaved to file {remapped_json_path}')

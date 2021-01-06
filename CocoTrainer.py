@@ -9,5 +9,5 @@ class CocoTrainer(DefaultTrainer):
             os.makedirs('coco_eval', exist_ok=True)
             output_folder ='coco_eval'
 
-        return COCOEvaluator(dataset_name, cfg, False, output_folder)
+        return COCOEvaluator(dataset_name, ("bbox", "segm"), False, output_folder)
 
