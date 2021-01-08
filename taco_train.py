@@ -197,7 +197,7 @@ cfg.TEST.EVAL_PERIOD = 50
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
-cfg.SOLVER.BASE_LR = 0.0025  # Starting lr scheduling.
+cfg.SOLVER.BASE_LR = 0.01  # Starting lr scheduling.
 cfg.SOLVER.MAX_ITER = 1500
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = args.class_num  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
@@ -220,12 +220,6 @@ if train_continue == "TRUE":
 # Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
 from CocoTrainer import CocoTrainer
 trainer = CocoTrainer(cfg)
-
-if train_continue == "TRUE":
-    # Receives the last checkpoint from the "output directory"
-    trainer.resume_or_load(resume=True)
-else:
-    trainer.resume_or_load(resume=False)
 
 if args.command == "train":
     # trainer = Trainer(cfg) # From https://github.com/facebookresearch/detectron2/issues/810
@@ -359,6 +353,71 @@ elif args.command == "infer_mask":
     # # Give information about predicted classes and boxes
     print(outputs["instances"].pred_classes)
     print(outputs["instances"].pred_boxes)
+
+elif args.command == "infer_video":
+    video_input = "video_test/conv04_720p.mp4"
+    output = None#"conv04_720pred.mkv"
+
+
+    import argparse
+    import glob
+    import multiprocessing as mp
+    import os
+    import time
+    import cv2
+    import tqdm
+    from detectron2.config import get_cfg
+    from detectron2.data.detection_utils import read_image
+    from detectron2.utils.logger import setup_logger
+    from predictor_demo import VisualizationDemo
+
+    # constants
+    WINDOW_NAME = "COCO detections"
+
+    mp.set_start_method("spawn", force=True)
+
+    demo = VisualizationDemo(cfg)
+
+    video = cv2.VideoCapture(video_input)
+    width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    frames_per_second = video.get(cv2.CAP_PROP_FPS)
+    num_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+    basename = os.path.basename(video_input)
+
+    if output:
+        if os.path.isdir(output):
+            output_fname = os.path.join(output, basename)
+            output_fname = os.path.splitext(output_fname)[0] + ".mkv"
+        else:
+            output_fname = output
+        assert not os.path.isfile(output_fname), output_fname
+        output_file = cv2.VideoWriter(
+            filename=output_fname,
+            # some installation of opencv may not support x264 (due to its license),
+            # you can try other format (e.g. MPEG)
+            fourcc=cv2.VideoWriter_fourcc(*"x264"),
+            fps=float(frames_per_second),
+            frameSize=(width, height),
+            isColor=True,
+        )
+    assert os.path.isfile(video_input)
+    for vis_frame in tqdm.tqdm(demo.run_on_video(video), total=num_frames):
+        if output:
+            output_file.write(vis_frame)
+        else:
+            cv2.namedWindow(basename, cv2.WINDOW_NORMAL)
+            cv2.imshow(basename, vis_frame)
+            if cv2.waitKey(1) == 27:
+                break  # esc to quit
+    video.release()
+    if output:
+        output_file.release()
+    else:
+        cv2.destroyAllWindows()
+
+
+
 
 elif args.command == "predict_coco":
     cfg = get_cfg()
