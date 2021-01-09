@@ -62,6 +62,7 @@ from detectron2 import model_zoo
 from detectron2.utils.visualizer import ColorMode
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 from detectron2.data import build_detection_test_loader
+import pandas as pd
 
 # Parsing global arguments
 parser = argparse.ArgumentParser(description='Custom implementation of Detectron2 using the TACO dataset.')
@@ -197,8 +198,8 @@ cfg.TEST.EVAL_PERIOD = 50
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
-cfg.SOLVER.BASE_LR = 0.01  # Starting lr scheduling.
-cfg.SOLVER.MAX_ITER = 1500
+cfg.SOLVER.BASE_LR = 0.005  # Starting lr scheduling.
+cfg.SOLVER.MAX_ITER = 20
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = args.class_num  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
@@ -206,7 +207,7 @@ os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 # Freeze the first several stages so they are not trained.
 # There are 5 stages in ResNet. The first is a convolution, and the following
 # stages are each group of residual blocks.
-cfg.MODEL.BACKBONE.FREEZE_AT = 1 # default is 2
+cfg.MODEL.BACKBONE.FREEZE_AT = 4 # default is 2
 
 # Getting mAP calculation from Train loop
 train_continue = "FALSE" # Make this a passable argument #TODO
@@ -214,21 +215,103 @@ if train_continue == "TRUE":
     cfg.SOLVER.MAX_ITER = 1
     cfg.TEST.EVAL_PERIOD = 1
 
-# default trainer, does not include test or val loss. Custom coco trainer created to tackle this.
-#trainer = DefaultTrainer(cfg)
-
-# Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
-from CocoTrainer import CocoTrainer
-trainer = CocoTrainer(cfg)
-
 if args.command == "train":
-    # trainer = Trainer(cfg) # From https://github.com/facebookresearch/detectron2/issues/810
+    # default trainer, does not include test or val loss. Custom coco trainer created to tackle this.
+    #trainer = DefaultTrainer(cfg)
+
+    # Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
+    from CocoTrainer import CocoTrainer
+    trainer = CocoTrainer(cfg)
+    #trainer = Trainer(cfg) # From https://github.com/facebookresearch/detectron2/issues/810
+
     val_loss = ValidationLoss(cfg)
     trainer.register_hooks([val_loss])
     # swap the order of PeriodicWriter and ValidationLoss
     trainer._hooks = trainer._hooks[:-2] + trainer._hooks[-2:][::-1]
     trainer.resume_or_load(resume=False)
     trainer.train()
+
+if args.command == "train_crossval":
+    import pandas as pd
+    import numpy as np
+    import json
+
+    def load_json_arr(json_path):
+        lines = []
+        with open(json_path, 'r') as f:
+            for line in f:
+                lines.append(json.loads(line))
+        return lines
+
+
+    experiment_folder = './output'
+    freeze_stages = [1, 2, 3, 4, 5]
+    LRs = [0.01, 0.005, 0.0025, 0.001]
+    kfold_num = 5
+
+    metric_keys = ['bbox/AP', 'bbox/AP50', 'bbox/AP75', 'bbox/APl', 'bbox/APm', 'bbox/APs', 'segm/AP',
+                   'segm/AP50', 'segm/AP75', 'segm/APl', 'segm/APm', 'segm/APs', 'mask_rcnn/accuracy',
+                   'mask_rcnn/false_negative', 'mask_rcnn/false_positive']
+
+    results_df = pd.DataFrame(columns=['Freeze', 'LR', 'KFold', 'bbox/AP', 'bbox/AP50', 'bbox/AP75', 'bbox/APl', 'bbox/APm', 'bbox/APs',
+                 'segm/AP',
+                 'segm/AP50', 'segm/AP75', 'segm/APl', 'segm/APm', 'segm/APs', 'mask_rcnn/accuracy',
+                 'mask_rcnn/false_negative', 'mask_rcnn/false_positive'])
+
+    interim_results_df = results_df
+    kfold_results_df = results_df
+    k_fold_num = 5
+    for freeze in freeze_stages:
+        for lr in LRs:
+            cfg.SOLVER.BASE_LR = lr
+            cfg.MODEL.BACKBONE.FREEZE_AT = freeze
+            for kfold in range(kfold_num):
+                print(f"Starting {kfold + 1} of {k_fold_num} - Freeze={freeze} ,validation at LR={lr}")
+
+                # Registering and using each training dataset.
+                ann_train = "ann"+str(kfold)+"map"+str(args.class_num)+"train.json"
+                register_coco_instances("taco_kfold_train", {}, args.data_dir + "/" + ann_train, args.data_dir)
+                dataset_kfold_train = DatasetCatalog.get("taco_kfold_train")
+
+                # Getting configurations for this setup:
+                cfg.DATASETS.TRAIN = ("taco_kfold_train",)
+
+                # Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
+                from CocoTrainer import CocoTrainer
+                trainer = CocoTrainer(cfg)
+                trainer.resume_or_load(resume=False)
+                trainer.train()
+
+                # load the information from the metrics.json and save the mAP, AP50, AP75, class_accy, mask_rcnn_accy
+                exp_metrics = load_json_arr(experiment_folder + '/metrics.json')
+
+                # loading all metrics in the metrics.json folder to dataframe
+                x = []
+                for metric in metric_keys:
+                    # Getting metric values, getting the avg of last three in list
+                    x.append((sum([x[metric] for x in exp_metrics if metric in x][-3:]) / 3))
+                row = pd.DataFrame(x, metric_keys).T
+                cross_val_df = pd.concat([results_df, row], 0)  # Adding metrics
+
+                cross_val_df['Freeze'] = freeze
+                cross_val_df['LR'] = lr
+                cross_val_df['KFold'] = kfold
+
+                # Accummulating all results into a single dataframe.
+                interim_results_df = interim_results_df.append(cross_val_df)
+
+                # Saving interim results in case it crashes later.
+                interim_results_df.to_csv("kfold_results/" + "interim_freeze_" + str(freeze) + "_lr_" + str(lr) +
+                                          "_fold_" + str(kfold) + ".csv")
+
+                # Reset the metrics file by deleting the entry
+                os.remove(experiment_folder + '/metrics.json')
+
+            last_5 = interim_results_df.tail(5)
+            kfold_results_df = pd.concat([kfold_results_df, last_5.groupby('Freeze', as_index=False).mean()])
+
+            # Saving final val data
+            kfold_results_df.to_csv("kfold_results/" + "kfold_freeze_" + str(freeze) + "_lr_" + str(lr) + ".csv")
 
 if args.command == "train_val2":
     from MyTrainer import MyTrainer
@@ -356,8 +439,7 @@ elif args.command == "infer_mask":
 
 elif args.command == "infer_video":
     video_input = "video_test/conv04_720p.mp4"
-    output = None#"conv04_720pred.mkv"
-
+    output = "video_out"#"conv04_720pred.mkv"
 
     import argparse
     import glob
@@ -370,6 +452,13 @@ elif args.command == "infer_video":
     from detectron2.data.detection_utils import read_image
     from detectron2.utils.logger import setup_logger
     from predictor_demo import VisualizationDemo
+
+    # Uncomment below to run predictor on gpu instead. Faster, but not able to be done while training.
+    cfg.MODEL.DEVICE = 'cpu'
+
+    cfg.MODEL.WEIGHTS = args.weights  # path to the weights for inference.
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.8  # set a custom testing threshold
+    predictor = DefaultPredictor(cfg)
 
     # constants
     WINDOW_NAME = "COCO detections"
@@ -388,7 +477,7 @@ elif args.command == "infer_video":
     if output:
         if os.path.isdir(output):
             output_fname = os.path.join(output, basename)
-            output_fname = os.path.splitext(output_fname)[0] + ".mkv"
+            output_fname = os.path.splitext(output_fname)[0] + ".mp4"
         else:
             output_fname = output
         assert not os.path.isfile(output_fname), output_fname
@@ -396,7 +485,7 @@ elif args.command == "infer_video":
             filename=output_fname,
             # some installation of opencv may not support x264 (due to its license),
             # you can try other format (e.g. MPEG)
-            fourcc=cv2.VideoWriter_fourcc(*"x264"),
+            fourcc=cv2.VideoWriter_fourcc(*"MP4V"),
             fps=float(frames_per_second),
             frameSize=(width, height),
             isColor=True,
