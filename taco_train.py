@@ -47,6 +47,7 @@ import os
 import argparse
 import time
 from datetime import datetime
+import shutil
 
 # Importing custom functions
 from utils import *
@@ -193,20 +194,20 @@ cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rc
 cfg.DATASETS.TRAIN = ("taco_train",)
 cfg.DATASETS.VAL = ("taco_val",)
 cfg.DATASETS.TEST = ("arc_test",)
-cfg.TEST.EVAL_PERIOD = 50
+cfg.TEST.EVAL_PERIOD = 800
 
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
 cfg.SOLVER.BASE_LR = 0.005  # Starting lr scheduling.
-cfg.SOLVER.MAX_ITER = 20
+cfg.SOLVER.MAX_ITER = 1500
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = args.class_num  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
+cfg.MODEL.DEVICE = 'cuda:0'
 
 # Freeze the first several stages so they are not trained.
-# There are 5 stages in ResNet. The first is a convolution, and the following
-# stages are each group of residual blocks.
+# There are 5 stages in ResNet. The first is a convolution, and the following stages are each group of residual blocks.
 cfg.MODEL.BACKBONE.FREEZE_AT = 4 # default is 2
 
 # Getting mAP calculation from Train loop
@@ -231,7 +232,7 @@ if args.command == "train":
     trainer.resume_or_load(resume=False)
     trainer.train()
 
-if args.command == "train_crossval":
+elif args.command == "train_crossval":
     import pandas as pd
     import numpy as np
     import json
@@ -269,12 +270,13 @@ if args.command == "train_crossval":
                 print(f"Starting {kfold + 1} of {k_fold_num} - Freeze={freeze} ,validation at LR={lr}")
 
                 # Registering and using each training dataset.
-                ann_train = "ann"+str(kfold)+"map"+str(args.class_num)+"train.json"
-                register_coco_instances("taco_kfold_train", {}, args.data_dir + "/" + ann_train, args.data_dir)
-                dataset_kfold_train = DatasetCatalog.get("taco_kfold_train")
+                ann_train = "ann_"+str(kfold)+"_map"+str(args.class_num)+"train.json"
+                registry_name = "taco_dataset"+str(kfold)+"_"+str(lr)+"_"+str(freeze)
+                register_coco_instances(registry_name, {}, args.data_dir + "/" + ann_train, args.data_dir)
+                dataset_kfold_train = DatasetCatalog.get(registry_name)
 
                 # Getting configurations for this setup:
-                cfg.DATASETS.TRAIN = ("taco_kfold_train",)
+                cfg.DATASETS.TRAIN = (registry_name,)
 
                 # Training with custom validation loss trainer CocoTrainer.py, which evaluates the COCO AP values
                 from CocoTrainer import CocoTrainer
@@ -288,7 +290,7 @@ if args.command == "train_crossval":
                 # loading all metrics in the metrics.json folder to dataframe
                 x = []
                 for metric in metric_keys:
-                    # Getting metric values, getting the avg of last three in list
+                    # Getting metric values, getting the avg of last three in list # NOTE: This doesn't work with 500iter AP. We are averaging all three values, which is def. not correct.
                     x.append((sum([x[metric] for x in exp_metrics if metric in x][-3:]) / 3))
                 row = pd.DataFrame(x, metric_keys).T
                 cross_val_df = pd.concat([results_df, row], 0)  # Adding metrics
@@ -304,16 +306,18 @@ if args.command == "train_crossval":
                 interim_results_df.to_csv("kfold_results/" + "interim_freeze_" + str(freeze) + "_lr_" + str(lr) +
                                           "_fold_" + str(kfold) + ".csv")
 
-                # Reset the metrics file by deleting the entry
+                # Save current metrics file and delete old one to avoid conflicts.
+                shutil.copyfile(experiment_folder + '/metrics.json',
+                                experiment_folder + f'/metrics_FR{str(freeze)}_LR{str(lr)}_KF{str(kfold)}.json')
                 os.remove(experiment_folder + '/metrics.json')
-
+                print(f"Finished {kfold + 1} of {k_fold_num} - Freeze={freeze} ,validation at LR={lr}")
             last_5 = interim_results_df.tail(5)
             kfold_results_df = pd.concat([kfold_results_df, last_5.groupby('Freeze', as_index=False).mean()])
 
             # Saving final val data
             kfold_results_df.to_csv("kfold_results/" + "kfold_freeze_" + str(freeze) + "_lr_" + str(lr) + ".csv")
 
-if args.command == "train_val2":
+elif args.command == "train_val2":
     from MyTrainer import MyTrainer
     trainer = MyTrainer(cfg)
     from LossEvalHook import LossEvalHook
