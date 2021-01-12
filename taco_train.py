@@ -200,11 +200,11 @@ cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
 cfg.SOLVER.BASE_LR = 0.005  # Starting lr scheduling.
-cfg.SOLVER.MAX_ITER = 1500
+cfg.SOLVER.MAX_ITER = 800
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = args.class_num  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
-cfg.MODEL.DEVICE = 'cuda:0'
+#cfg.MODEL.DEVICE = 'cuda:0'
 
 # Freeze the first several stages so they are not trained.
 # There are 5 stages in ResNet. The first is a convolution, and the following stages are each group of residual blocks.
@@ -291,7 +291,7 @@ elif args.command == "train_crossval":
                 x = []
                 for metric in metric_keys:
                     # Getting metric values, getting the avg of last three in list # NOTE: This doesn't work with 500iter AP. We are averaging all three values, which is def. not correct.
-                    x.append((sum([x[metric] for x in exp_metrics if metric in x][-3:]) / 3))
+                    x.append(([x[metric] for x in exp_metrics if metric in x][-1]))
                 row = pd.DataFrame(x, metric_keys).T
                 cross_val_df = pd.concat([results_df, row], 0)  # Adding metrics
 
