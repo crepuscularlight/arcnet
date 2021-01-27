@@ -5,3 +5,4 @@ output/*events.*
 output/*.pth
 output/instances_predictions.pth
 *.pth
+*.pyc
