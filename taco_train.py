@@ -1,7 +1,7 @@
 """
 Author: Fidel Esquivel Estay
 GitHub: phideltaee
-Description: Custom training model for Detectron2 using a modified version of the TACO dataset.
+Description: Custom training model for Detectron2 using a modified version of the TACO dataset and the ARC Litter Dataset.
 
 ------------------------------------------------------
 ------------------------------------------------------
@@ -33,7 +33,7 @@ NOTES on Implementation:
     #    EXAMPLE:  python arcnet_main.py inference --image_path img_test/trash_01.jpg --weights output/taco_3000.pth
 
     # Infering on an image and the Mask of the image. Predicts random image and shows its mask for the test dataset
-    #              python arcnet_main.py infer_mask --weights output/taco_3000.pth
+    #              python arcnet_main.py infer_mask --weights output/taco_3000.pth --ann_train ann_0_map1train.json --ann_val ann_0_map1val.json
 
      # Check Tensorboard for model training validation information.
      tensorboard --logdir ./output/
