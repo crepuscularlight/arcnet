@@ -4,6 +4,8 @@ import copy
 import os
 import csv
 import json
+import time
+from datetime import datetime
 from pycocotools.coco import COCO
 
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
@@ -21,6 +23,10 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
 
     return cv2.resize(image, dim, interpolation=inter)
 
+def get_timestamp():
+    timestamp = time.time()
+    dt_object = datetime.fromtimestamp(timestamp)
+    return dt_object.strftime("%Y_%m_%d_%H_%M_%S")
 
 def replace_dataset_classes(dataset, class_map):
     """ Replaces classes of dataset based on a dictionary"""

@@ -6,7 +6,7 @@ The arcnet is a custom network developed to automatically detect and label river
 This implementation used the following packages and versions. 
     
     - CUDA: 11.0
-    - Nvidia Driver 450
+    - Nvidia Driver 450.80.02
     - Pytorch 1.7.0
     - Python 3.8.5
     - Ubuntu 18.04.5 LTS
