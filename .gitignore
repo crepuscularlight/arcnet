@@ -1,6 +1,7 @@
 data/batch_*
 data/*.json
-
+segments/festay_arc_litter/v2.1
+video
 output/*events.*
 output/*.pth
 output/instances_predictions.pth
