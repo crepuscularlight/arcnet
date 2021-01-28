@@ -194,27 +194,20 @@ cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rc
 cfg.DATASETS.TRAIN = ("taco_train",)
 cfg.DATASETS.VAL = ("taco_val",)
 cfg.DATASETS.TEST = ("arc_test",)
-cfg.TEST.EVAL_PERIOD = 800
+cfg.TEST.EVAL_PERIOD = 50 # change this value to compute the validation metrics at different iterations.
 
 cfg.DATALOADER.NUM_WORKERS = 2
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
 cfg.SOLVER.IMS_PER_BATCH = 4
 cfg.SOLVER.BASE_LR = 0.005  # Starting lr scheduling.
-cfg.SOLVER.MAX_ITER = 800
+cfg.SOLVER.MAX_ITER = 3000 # each iteration corresponds to a full batch of images going throuhg the network. With batch size of 16 (default).
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512 # (default: 512)
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = args.class_num  # (see https://detectron2.readthedocs.io/tutorials/datasets.html#update-the-config-for-new-datasets)
 os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 #cfg.MODEL.DEVICE = 'cuda:0'
 
-# Freeze the first several stages so they are not trained.
 # There are 5 stages in ResNet. The first is a convolution, and the following stages are each group of residual blocks.
-cfg.MODEL.BACKBONE.FREEZE_AT = 4 # default is 2
-
-# Getting mAP calculation from Train loop
-train_continue = "FALSE" # Make this a passable argument #TODO
-if train_continue == "TRUE":
-    cfg.SOLVER.MAX_ITER = 1
-    cfg.TEST.EVAL_PERIOD = 1
+cfg.MODEL.BACKBONE.FREEZE_AT = 2 # Best obtained at 2.
 
 if args.command == "train":
     # default trainer, does not include test or val loss. Custom coco trainer created to tackle this.
