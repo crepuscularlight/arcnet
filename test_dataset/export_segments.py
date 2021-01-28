@@ -17,11 +17,10 @@ dataset_identifier = user+"/arc_litter"
 dataset = client.get_dataset(dataset_identifier)
 print(dataset)
 
-# Exprting to COCO format
+# Exporting to COCO format
 # Export to COCO format
 from segments.utils import export_dataset
 #export_dataset(dataset, 'coco')
-
 
 # # Alternatively, if obtained directly from a local file.
 # pip install segments-ai --upgrade
