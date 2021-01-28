@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../TACO/.idea/TACO.iml" filepath="$PROJECT_DIR$/../TACO/.idea/TACO.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/arcnet.iml" filepath="$PROJECT_DIR$/.idea/arcnet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../arcnet_ros/.idea/arcnet_ros.iml" filepath="$PROJECT_DIR$/../arcnet_ros/.idea/arcnet_ros.iml" />
     </modules>
   </component>
 </project>

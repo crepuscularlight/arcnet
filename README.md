@@ -133,15 +133,17 @@ to "other litter" and "plastic litter", use "maps/map_to_2.csv" when running fro
     
     The arguments are the following:
    
-   
-    parser.add_argument('--class_num', required=True, type=int, metavar="Number of classes", help='Number of target classes')
-    parser.add_argument('--image_path', required=False, default='./img_test/test_img1.jpg',  metavar="/path/file.jpg", help='Test image path')
-    parser.add_argument('--data_dir', required=False, default='./data', metavar="/path_to_data/", help='Dataset directory')
-    parser.add_argument("command", metavar="<command>",help="Opt: 'train', 'test', 'inference")
-    parser.add_argument('--weights', required=False, default='./output/taco_500_arc.pth', metavar="/trained_weights.pth", help='weights used for inference')
-    parser.add_argument('--ann_train', required=False, metavar="file.json", help='Train Data Annotations')
-    parser.add_argument('--ann_test', required=False, metavar="file.json", help='Test Data Annotations')
-    parser.add_argument('--ann_val', required=False, metavar="file.json", help='Validation Data Annotations')
+    
+    
+        parser.add_argument('--class_num', required=True, type=int, metavar="Number of classes", help='Number of target classes')
+        parser.add_argument('--image_path', required=False, default='./img_test/test_img1.jpg',  metavar="/path/file.jpg", help='Test image path')
+        parser.add_argument('--data_dir', required=False, default='./data', metavar="/path_to_data/", help='Dataset directory')
+        parser.add_argument("command", metavar="<command>",help="Opt: 'train', 'test', 'inference")
+        parser.add_argument('--weights', required=False, default='./output/taco_500_arc.pth', metavar="/trained_weights.pth", help='weights used for inference')
+        parser.add_argument('--ann_train', required=False, metavar="file.json", help='Train Data Annotations')
+        parser.add_argument('--ann_test', required=False, metavar="file.json", help='Test Data Annotations')
+        parser.add_argument('--ann_val', required=False, metavar="file.json", help='Validation Data Annotations')
+
 
 
 #### Testing 
